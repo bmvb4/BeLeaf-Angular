@@ -1,0 +1,110 @@
+<!-- <form [formGroup]="myForm" (ngSubmit)="submit()">
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input
+            formControlName="name"
+            id="name"
+            type="text"
+            class="form-control">
+        <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+            <div *ngIf="f.name.errors && f.name.errors.required">Name is required.</div>
+            <div *ngIf="f.name.errors && f.name.errors.minlength">Name should be 3 character.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="file">File</label>
+        <input
+            formControlName="file"
+            id="file"
+            type="file"
+            class="form-control"
+            (change)="onFileChange($event)">
+        <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+            <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>
+        </div>
+    </div>
+
+    <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:500px">
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form> -->
+
+<!-- <div class="container px-4 py-5 mx-auto">
+    <div class="row d-flex justify-content-center">
+        <div class="card">
+            <div class="row ">  <img class="rounded-circle " src="data:image/png;base64,{{myUser.photo}}"  width="60px"></div>
+                <div class="flex-column">
+                    <h3 class="mb-0 font-weight-normal">{{myUser.firstName}} {{myUser.lastName}}</h3>
+                    <h3 class="mb-0 font-weight-normal">{{myUser.username}}</h3>
+                </div>
+            </div>
+            <div class="row px-3 form-group"> <textarea class="text-muted bg-light mt-4 mb-3" placeholder="Hi Camilla, what's on your mind today?"></textarea> </div>
+            <div class="row px-3">
+                <p class="fa fa-user options mb-0 mr-4"></p>
+                <p class="fa fa-map-marker options mb-0 mr-4"></p>
+                <p class="fa fa-image options mb-0 mr-4"></p> <img class="options" src="https://img.icons8.com/material/24/000000/more--v2.png" width="30px" height="28px">
+                <div class="btn btn-success ml-auto">Post</div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-auto">
+                                <picture><img class="rounded-circle img-fluid" src="data:image/png;base64,{{myUser.photo}}" width="80" height="80"></picture>
+                            </div>
+                            <div class="col-auto">
+                                <i class="form-control-plaintext d-sm-flex justify-content-sm-start" style="font-weight: bold;font-family: 'Noto Sans JP', sans-serif;font-size: 17px;height: 22.8px;margin-top: 10px;"> </i>
+                                <i class="form-control-plaintext d-sm-flex justify-content-sm-start" style="font-weight: bold;font-family: 'Noto Sans JP', sans-serif;font-size: 17px;height: 22.8px;margin-top: 10px;"> </i>
+                              </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <form><textarea class="form-control" style="background: rgb(255, 255, 255);"></textarea></form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+<form [formGroup]="myForm" (ngSubmit)="submit(description.value)">
+  <div class="container"  style="max-width: 450px;">
+        <div class="row">
+            <div class="col">
+                <div class="card d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex align-items-center align-items-sm-center align-items-md-center align-items-lg-center justify-content-xxl-center align-items-xxl-center">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-12 offset-lg-0" style="text-align: center;">
+                                <picture><img class="rounded-circle img-fluid" src="data:image/png;base64,{{myUser.photo}}" width="60" height="60"></picture>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                    <div class="col"><p class="form-control-plaintext" type="text" style="text-align: center;font-weight: bold;font-style: italic;font-size: 16px;"> {{myUser.firstName}} {{myUser.lastName}}</p></div>
+                                    <div class="col"><p class="form-control-plaintext" type="text" style="text-align: center;font-weight: bold;font-size: 16px;">{{myUser.username}}</p></div>
+                                    <div class="col">  <img  class="img-thumbnail" data-bs-toggle="tooltip" data-bss-tooltip="" [src]="imageSrc" onclick="document.getElementById('selectedFile').click();" *ngIf="imageSrc" style="margin-bottom: 10px;">
+
+                                        <img #defautImage class="img-thumbnail" data-bs-toggle="tooltip" data-bss-tooltip="" src="../../../assets/image/upload.png" onclick="document.getElementById('selectedFile').click();" *ngIf="!imageSrc" style="margin-bottom: 10px;">
+
+                                        <input class="form-control" id="selectedFile" type="file" accept="image/*" style="margin-top: 10px;margin-bottom: 10px; display: none;"  (change)="onFileChange($event)">
+                                        <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                                            <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>
+                                        </div>
+                                    </div><textarea #description class="form-control" placeholder="Image sescription" style="background: rgb(255, 255, 255);margin-top: 10px;margin-bottom: 10px;text-align: left;border-style: solid;padding: 1px 12px;"></textarea>
+                                    <div class="col d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center">
+                                      <button class="btn btn-primary btn-sm text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center" type="submit" style="width: auto;margin-top: 10px;">Post</button></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
