@@ -142,6 +142,23 @@ export class AccountServicesService {
       responseType: 'json',
     })
   }
+
+  DeleteComment(comment: Comment) {
+    console.log(this.tokenStorage.getToken)
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenStorage.getToken()}`,
+    })
+
+    const bodyComment = JSON.stringify(comment)
+    var url = maniUrl + '/posts/comment'
+    return this.http.request('delete', url, {
+      headers: myheaders,
+      responseType: 'json',
+      body: bodyComment,
+    })
+  }
+
   GetComments(
     postId: any,
     page: Number,

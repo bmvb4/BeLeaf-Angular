@@ -69,6 +69,20 @@ export class HomeFeedComponent implements OnInit {
       },
     )
   }
+  DeleteComment(comment: GetComment, postComments: PostComment) {
+    console.log(comment)
+    this.apiService.DeleteComment(comment).subscribe(
+      (resp) => {
+        postComments.post.commentsCounter -= 1
+        postComments.comments = postComments.comments.filter(
+          (item) => item.idComment !== comment.idComment,
+        )
+      },
+      (error) => {
+        console.error(error)
+      },
+    )
+  }
   MakeComment(PostComment: PostComment, commentText: string) {
     var comment = new Comment()
     comment.commentText = commentText
@@ -78,6 +92,7 @@ export class HomeFeedComponent implements OnInit {
       (resp) => {
         PostComment.post.commentsCounter += 1
         var pushComment = new GetComment()
+        pushComment.idComment = resp.body
         pushComment.commentText = commentText
         pushComment.idPost = PostComment.post.idPost
         pushComment.idUser = this.myUser.username

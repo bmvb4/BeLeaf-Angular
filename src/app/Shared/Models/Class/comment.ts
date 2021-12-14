@@ -4,4 +4,5 @@ export class Comment implements IComment {
   commentText: String
   idUser: String
   idPost: any
+  idComment: any
 }

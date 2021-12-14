@@ -565,6 +565,10 @@
                                           "
                                         >
                                           <i
+                                            *ngIf="
+                                              posts.post.idUser ==
+                                              this.myUser.username
+                                            "
                                             class="fa fa-pencil flex-wrap"
                                             style="
                                               font-size: 20px;
@@ -583,12 +587,23 @@
                                           "
                                         >
                                           <i
+                                            *ngIf="
+                                              posts.post.idUser ==
+                                              this.myUser.username
+                                            "
+                                            style="font-size: 20px; color: red"
                                             class="
                                               fa fa-remove
                                               d-md-flex
                                               ms-auto
                                               justify-content-md-end
                                               align-items-md-center
+                                            "
+                                            (dblclick)="
+                                              DeleteComment(
+                                                this.postcomments,
+                                                posts
+                                              )
                                             "
                                           ></i>
                                         </div>
