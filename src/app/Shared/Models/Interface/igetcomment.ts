@@ -4,4 +4,5 @@ export interface IGetComment {
   idPost: any
   idComment: any
   userPhoto: any
+  isEdit: boolean //only UI
 }

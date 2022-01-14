@@ -1,8 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { FormBuilder } from '@angular/forms'
-import { empty } from 'rxjs'
 import { AccountServicesService } from 'src/app/Shared/account-services.service'
-import { Posts } from 'src/app/Shared/Models/Class/posts'
 import { IPosts } from 'src/app/Shared/Models/Interface/iposts'
 import { Follow } from '../../Shared/Models/Class/follow'
 import { Like } from '../../Shared/Models/Class/like'
@@ -68,6 +66,10 @@ export class HomeFeedComponent implements OnInit {
         console.error(error)
       },
     )
+  }
+  EditComment(comment: GetComment) {
+    comment.isEdit = comment.isEdit == true ? false : true
+    console.log(comment.commentText)
   }
   DeleteComment(comment: GetComment, postComments: PostComment) {
     console.log(comment)

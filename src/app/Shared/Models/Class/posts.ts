@@ -1,7 +1,7 @@
 import { IPosts } from '../Interface/iposts'
 
 export class Posts implements IPosts {
-  commentsExpanded: boolean
+  commentsExpanded: boolean //only UI
   idPost: any
   photo: any
   description: string
@@ -12,5 +12,5 @@ export class Posts implements IPosts {
   likesCounter: number
   isLiked: boolean
   isFollow: boolean
-  commentsCounter: number //only UI
+  commentsCounter: number
 }

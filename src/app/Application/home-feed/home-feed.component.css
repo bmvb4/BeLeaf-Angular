@@ -21,3 +21,6 @@ p {
   background-color: #51cbce;
   border-radius: 10px;
 }
+.dropdown-toggle::after {
+  display: none;
+}
