@@ -1,0 +1,27 @@
+p {
+    font-size: medium;
+  }
+  
+  .row {
+    --bs-gutter-x: 0rem !important;
+  }
+  .scrollme {
+    overflow-x: auto;
+  }
+  /* Scroll 1 */
+  .scrollme::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollme::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+  }
+  .scrollme::-webkit-scrollbar-thumb {
+    background-color: #51cbce;
+    border-radius: 10px;
+  }
+  .dropdown-toggle::after {
+    display: none;
+  }
+  

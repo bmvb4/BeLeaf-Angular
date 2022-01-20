@@ -289,7 +289,7 @@
                   <div
                     class="col-sm-2 col-md-3 text-center d-sm-flex justify-content-sm-center align-items-sm-center"
                   >
-                    <img
+                    <img [routerLink]="['/profile/', posts.post.idUser]"
                       class="rounded-circle img-fluid"
                       src="data:image/png;base64,{{ posts.post.userPhoto }}"
                       style="
@@ -305,6 +305,7 @@
                   <div class="col-sm-5 col-md-3 col-xxl-4 text-start">
                     <i
                       class="form-control-plaintext d-sm-flex justify-content-sm-start"
+                      [routerLink]="['/profile/', posts.post.idUser]"
                       style="
                         font-weight: bold;
                         font-family: 'Noto Sans JP', sans-serif;

@@ -16,6 +16,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PostCreateComponent } from './Application/post-create/post-create.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { ProfileComponent } from './Application/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +29,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     ShortNumberPipe,
     PostCreateComponent,
     SafeHtmlPipe,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

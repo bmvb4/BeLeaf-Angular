@@ -16,6 +16,7 @@ import { INewPost } from './Models/Interface/inew-post'
 import { Comment } from './Models/Class/comment'
 import { IComment } from './Models/Interface/icomment'
 import { IGetComment } from './Models/Interface/igetcomment'
+import { IProfiles } from './Models/Interface/iprofiles'
 //var maniUrl = 'http://localhost:5201'
 var maniUrl = 'http://159.65.94.122'
 @Injectable({
@@ -46,6 +47,20 @@ export class AccountServicesService {
     })
 
     var url = maniUrl + '/posts/getlast/' + page
+    return this.http.get<IPosts>(url, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
+  GetUserPost(UserId:string,page: Number): Observable<HttpResponse<IPosts>> {
+    console.log(this.tokenStorage.getToken())
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenStorage.getToken()}`,
+    })
+
+    var url = maniUrl + '/posts/getAll/'+UserId+'/' + page
     return this.http.get<IPosts>(url, {
       headers: myheaders,
       observe: 'response',
@@ -170,6 +185,21 @@ export class AccountServicesService {
     })
     var url = maniUrl + '/posts/comment/get/' + postId + '/' + page
     return this.http.get<IGetComment>(url, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
+  GetUserProfile(
+    userId: any,
+  ): Observable<HttpResponse<IProfiles>> {
+    console.log(this.tokenStorage.getToken())
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenStorage.getToken()}`,
+    })
+    var url = maniUrl + '/profile/user/get/' + userId 
+    return this.http.get<IProfiles>(url, {
       headers: myheaders,
       observe: 'response',
       responseType: 'json',

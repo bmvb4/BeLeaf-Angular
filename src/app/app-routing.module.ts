@@ -8,6 +8,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { PostCreateComponent } from './Application/post-create/post-create.component';
 import { GuardService } from './Shared/_guard/guard.service'
+import { ProfileComponent } from './Application/profile/profile.component';
 HomeFeedComponent
 const routes: Routes = [
   { path: 'login', component:LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
     path:'feed', component:HomeFeedComponent },
     {path:'settings', component:SettingsComponent},
     {path:'profile', component:MyProfileComponent},
+    {path:'profile/:id', component:ProfileComponent},
     {path:'create', component:PostCreateComponent}]},
   { path:'', redirectTo:'/feed', pathMatch:'full'}
 ];

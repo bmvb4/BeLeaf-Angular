@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../Shared/Models/Class/user';
+const USER_KEY: any = 'auth-user'
 
 @Component({
   selector: 'app-my-profile',
@@ -12,17 +13,19 @@ export class MyProfileComponent implements OnInit {
   firstname: any;
   lastname: any;
   description: any;
+  myUserCache: any = localStorage.getItem(USER_KEY)
+    myUser: any =
+      this.myUserCache !== null ? JSON.parse(this.myUserCache) : new User()
   constructor() { }
 
   ngOnInit(): void {
 
-    let myUser = localStorage.getItem('User');
-    let test = myUser !== null ? JSON.parse(myUser) : new User();
-    console.log(test);
-    this.userPhoto = test.photo;
-    this.username = test.username;
-    this.firstname = test.firstName;
-    this.lastname = test.lastName;
-    this.description = test.description;
+    
+    console.log(this.myUser);
+    this.userPhoto = this.myUser.photo;
+    this.username = this.myUser.username;
+    this.firstname = this.myUser.firstName;
+    this.lastname = this.myUser.lastName;
+    this.description = this.myUser.description;
   }
 }
