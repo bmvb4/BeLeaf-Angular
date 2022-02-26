@@ -39,15 +39,11 @@ export class GuardService {
       (resp) => {
         console.log("update")
         console.log(resp.body)
-        return true;
       },
       (error) => {
         console.error(error.body)
       },
     )
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-    console.log("Go home and kill yourself!!!");
     return false;
 }
 }
