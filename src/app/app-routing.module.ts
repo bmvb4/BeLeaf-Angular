@@ -14,12 +14,12 @@ const routes: Routes = [
   { path: 'login', component:LoginComponent},
   { path: 'register', component: RegisterComponent },
 
-  { path:'', component:MenuComponent, canActivate: [GuardService], children:[{
-    path:'feed', component:HomeFeedComponent },
-    {path:'settings', component:SettingsComponent},
-    {path:'profile', component:MyProfileComponent},
-    {path:'profile/:id', component:ProfileComponent},
-    {path:'create', component:PostCreateComponent}]},
+  { path:'',component:MenuComponent, canActivate: [GuardService], children:[{
+    path:'feed', component:HomeFeedComponent, canActivate: [GuardService] },
+    {path:'settings', component:SettingsComponent, canActivate: [GuardService]},
+    {path:'profile', component:MyProfileComponent, canActivate: [GuardService]},
+    {path:'profile/:id', component:ProfileComponent, canActivate: [GuardService]},
+    {path:'create', component:PostCreateComponent, canActivate: [GuardService]}]},
   { path:'', redirectTo:'/feed', pathMatch:'full'}
 ];
 

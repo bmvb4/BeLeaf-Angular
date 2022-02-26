@@ -9,7 +9,8 @@ const USER_KEY:any = 'auth-user';
 export class TokenService {
 
   constructor() { }
-  signOut(): void {
+  public signOut(): void {
+    console.log("GG")
     localStorage.clear();
   }
 

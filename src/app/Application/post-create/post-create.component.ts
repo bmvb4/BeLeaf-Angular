@@ -16,6 +16,7 @@ export class PostCreateComponent implements OnInit {
   myUser: User;
   defautSrc: string = "./assets/upload.png";
   imageSrc: string = "";
+  loading = false;
   myForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     file: new FormControl('', [Validators.required]),
@@ -53,6 +54,7 @@ export class PostCreateComponent implements OnInit {
     }
 
   submit(description:string) {
+    this.loading = true;
     console.log(this.myForm.value.fileSource);
     var newPost = new NewPost();
     var removePosition = this.myForm.value.fileSource.indexOf(',');
@@ -64,9 +66,11 @@ export class PostCreateComponent implements OnInit {
       this.apiService.MakePost(newPost).subscribe(resp => {
         console.log(resp.body);
         console.log(<Posts>resp.body);
+        this.loading = false;
         this.router.navigate(['./feed']);
       }, error => {
         console.error(error);
+        this.loading = false;
       });
     }
   }

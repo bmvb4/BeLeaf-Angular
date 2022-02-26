@@ -137,7 +137,15 @@
               <a class="nav-link btn-rotate" href="javascript:void(0)">
                 <i class="nc-icon nc-settings-gear-65"></i>
                 <p>
-                  <span class="d-lg-none d-md-block"><a href="#" [routerLink]="['/profile']">Account</a></span>
+                  <span class="d-lg-none d-md-block"><a href="#" [routerLink]="['/profile']">Settings</a></span>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-rotate" href="javascript:void(0)" (click)="SignOut()" [routerLink]="['/login']">
+                <i class="fa fa-sign-out"></i>
+                <p>
+                  <span class="d-lg-none d-md-block"><a href="#" >Sign Out</a></span>
                 </p>
               </a>
             </li>
@@ -147,7 +155,7 @@
     </nav>
 
     <!-- End Navbar -->
-    <div class="content" style="margin: 0px; padding:px;">
+    <div class="content mw-100" style="margin: 0px; ">
       <div class="row">
         <div class="col-md-12">
           <h3 class="description">

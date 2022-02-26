@@ -17,6 +17,8 @@ import { Comment } from './Models/Class/comment'
 import { IComment } from './Models/Interface/icomment'
 import { IGetComment } from './Models/Interface/igetcomment'
 import { IProfiles } from './Models/Interface/iprofiles'
+import { Token } from './Models/Class/token'
+import { IToken } from './Models/Interface/itoken'
 //var maniUrl = 'http://localhost:5201'
 var maniUrl = 'http://159.65.94.122'
 @Injectable({
@@ -198,8 +200,22 @@ export class AccountServicesService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
     })
-    var url = maniUrl + '/profile/user/get/' + userId 
+    var url = maniUrl + '/profile/user/get/' + userId
     return this.http.get<IProfiles>(url, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
+  RefreshToken(token: Token): Observable<HttpResponse<IToken>> {
+    console.log(this.tokenStorage.getToken)
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+
+    const body = JSON.stringify(token)
+    var url = maniUrl + '/token/refresh'
+    return this.http.post<IToken>(url, body, {
       headers: myheaders,
       observe: 'response',
       responseType: 'json',

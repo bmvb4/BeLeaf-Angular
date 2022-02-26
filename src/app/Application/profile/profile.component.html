@@ -9,12 +9,13 @@
         <div class="col" style="padding-right:20px;">
             <div class="row">
                 <div class="col"><h4>{{userProfile.firstName}}&nbsp;{{userProfile.lastName}}</h4></div>
+                <div class="col"><h6>Follow</h6></div>
             </div>
             <div class="row">
                 <div class="col"><h6>{{userProfile.username}}</h6></div>
             </div>
             <div class="row">
-                <div class="col " ><p class="rounded d-inline-flex p-2 text-white stats">Description: <br> {{userProfile.description}}</p></div>
+                <div class="col " ><p class="rounded d-inline-flex p-2  stats">Description: <br> {{userProfile.description}}</p></div>
             </div>
             <div class="row row-cols-3 rounded text-center justify-content-center p-1" style="background-color: #f06c3a;">
                 <div class="col justify-content-center" ><p>Followers <br>
@@ -27,6 +28,7 @@
         </div>
     </div>
 </div>
+<!-- posts -->
 <div infinite-scroll (scrolled)="onScrollDown($event)">
     <div class="container mt-5 mb-5" *ngFor="let posts of PostCommets">
       <div class="d-flex align-items-center justify-content-center">
@@ -102,7 +104,8 @@
                       >
                     </div>
                     <div
-                    class="col-auto  justify-content-ruight"
+                    class="col  justify-content-right"
+                    style="text-align: right;"
                   >
                     <div
                       class="nav-item btn-rotate"
@@ -121,12 +124,13 @@
                     </div>
                   </div>
                     </div>
-                   
-                   
+
+
                   </div>
                   <div class="row" #ImageRow>
                     <div
                       class="col d-xxl-flex flex-fill justify-content-xxl-center align-items-xxl-center"
+                      style="text-align: center;"
                     >
                       <img
                         class="img-fluid shadow-sm"
@@ -428,6 +432,6 @@
           </div>
         </div>
       </div>
-  
+
       <!-- end test2 -->
     </div>

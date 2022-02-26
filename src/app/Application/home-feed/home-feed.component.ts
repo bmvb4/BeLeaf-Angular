@@ -20,6 +20,7 @@ const USER_KEY: any = 'auth-user'
   styleUrls: ['./home-feed.component.css'],
 })
 export class HomeFeedComponent implements OnInit {
+  IsLoadingPost = true
   postsGet: IPosts[] = []
   commentsGet: IComment[] = []
   PostCommets: PostComment[] = []
@@ -35,6 +36,7 @@ export class HomeFeedComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {}
   ngOnInit(): void {
+    this.IsLoadingPost = true
     this.apiService.GetLastPost(this.page).subscribe(
       (resp) => {
         this.posts = <IPosts>resp.body
@@ -45,9 +47,13 @@ export class HomeFeedComponent implements OnInit {
           }
         })
         console.log(this.postsGet)
+        this.IsLoadingPost = false
       },
       (error) => {
         console.error(error)
+
+        this.IsLoadingPost = false
+
       },
     )
   }
@@ -176,6 +182,7 @@ export class HomeFeedComponent implements OnInit {
   }
   onScrollDown(ev: any) {
     console.log('scrolled down!!', ev)
+    this.IsLoadingPost = true
 
     this.page += 1
     this.apiService.GetLastPost(this.page).subscribe(
@@ -189,9 +196,12 @@ export class HomeFeedComponent implements OnInit {
           this.posts = <IPosts>resp.body
           this.posts.forEach((p: IPosts) => this.postsGet.push(p))
         }
+        this.IsLoadingPost = false
+
       },
       (error) => {
         console.error(error)
+        this.IsLoadingPost = false
       },
     )
   }

@@ -79,4 +79,7 @@ export class MenuComponent implements OnInit {
       navbar.classList.remove('bg-white')
     }
   }
+  SignOut(){
+    localStorage.clear();
+  }
 }
