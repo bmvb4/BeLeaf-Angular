@@ -19,6 +19,7 @@ import { IGetComment } from './Models/Interface/igetcomment'
 import { IProfiles } from './Models/Interface/iprofiles'
 import { Token } from './Models/Class/token'
 import { IToken } from './Models/Interface/itoken'
+import { Posts } from './Models/Class/posts'
 //var maniUrl = 'http://localhost:5201'
 var maniUrl = 'http://159.65.94.122'
 @Injectable({
@@ -142,6 +143,36 @@ export class AccountServicesService {
       headers: myheaders,
       observe: 'response',
       responseType: 'json',
+    })
+  }
+  UpdatePost(post: Posts): Observable<HttpResponse<IPosts>> {
+    console.log(this.tokenStorage.getToken)
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenStorage.getToken()}`,
+    })
+
+    const body = JSON.stringify(post)
+    var url = maniUrl + '/posts/update/'+post.idPost
+    return this.http.put<IPosts>(url, body, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
+  DeletePost(post: Posts) {
+    console.log(this.tokenStorage.getToken)
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenStorage.getToken()}`,
+    })
+
+    const bodyComment = JSON.stringify(post)
+    var url = maniUrl + '/posts/delete'
+    return this.http.request('delete', url, {
+      headers: myheaders,
+      responseType: 'json',
+      body: bodyComment,
     })
   }
   MakeComment(comment: Comment): Observable<HttpResponse<IComment>> {

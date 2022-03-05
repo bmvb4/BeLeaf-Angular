@@ -20,6 +20,7 @@ const USER_KEY: any = 'auth-user'
   styleUrls: ['./home-feed.component.css'],
 })
 export class HomeFeedComponent implements OnInit {
+  editDescription: string
   IsLoadingPost = true
   postsGet: IPosts[] = []
   commentsGet: IComment[] = []
@@ -64,6 +65,7 @@ export class HomeFeedComponent implements OnInit {
         var combinePost = new PostComment()
         combinePost.comments = this.comments
         combinePost.post = post
+        combinePost.id = this.PostCommets.length
         this.PostCommets.push(combinePost)
         console.log('combined: ')
         console.log(this.PostCommets)
@@ -214,7 +216,42 @@ export class HomeFeedComponent implements OnInit {
       post.commentsExpanded = true
     }
   }
+  SetEditPost(post: PostComment){
+    post.post.isEdit = post.post.isEdit == true ? false : true
+    this.editDescription = post.post.description
+    console.log("Edit post: "+ post.post.isEdit)
+  }
+  CancelEditPost(post: PostComment){
+    post.post.isEdit = false
+    this.editDescription = post.post.description
+    console.log("Edit post: "+ post.post.isEdit)
+  }
+  EditPost(post: PostComment){
+    post.post.description = this.editDescription
+    this.apiService.UpdatePost(post.post).subscribe(
+      (resp) => {
+        console.log(resp.body)
+      },
+      (error) => {
+        console.error(error)
+      },
+    )
+    post.post.isEdit = false
 
+    console.log("Edit post: "+ post.post.description)
+  }
+  DeletePost(post: PostComment, index: number){
+    this.apiService.DeletePost(post.post).subscribe(
+      (resp)=>{
+        this.PostCommets.splice(index,1)
+        console.log("after delete")
+        console.log(this.PostCommets)
+      },
+      (error) => {
+        console.error(error)
+      },
+    )
+  }
   formatDate(date: string): Date {
     const formattedDate = new Date(date)
     const hoursOffset = -(new Date().getTimezoneOffset() / 60)

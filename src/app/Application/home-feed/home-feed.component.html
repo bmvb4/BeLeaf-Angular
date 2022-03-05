@@ -1,5 +1,5 @@
 <div infinite-scroll (scrolled)="onScrollDown($event)">
-  <div class="container mt-5 mb-5" *ngFor="let posts of PostCommets">
+  <div class="container mt-5 mb-5" *ngFor="let posts of PostCommets; let postIndex=index">
     <!-- test -->
     <!-- <div class="d-flex align-items-center justify-content-center">
       <div class="card shadow-lg" style="max-width: 800px">
@@ -368,8 +368,8 @@
                       <div
                         ngbDropdownMenu
                       >
-                        <p ngbDropdownItem class="fa fa-pencil">   Edit</p>
-                        <p ngbDropdownItem class="fa fa-trash">Delete</p>
+                        <p ngbDropdownItem class="fa fa-pencil" (click)="SetEditPost(posts)">   Edit</p>
+                        <p ngbDropdownItem class="fa fa-trash" (click)="DeletePost(posts, postIndex)">Delete</p>
                       </div>
                     </div>
                   </div>
@@ -427,10 +427,18 @@
                       {{ posts.post.commentsCounter | shortNumber }}
                     </p>
                   </div>
+                  <div
+                  class="col-sm-1 d-sm-flex justify-content-sm-center align-items-sm-center"
+                >
+                <i *ngIf="posts.post.isEdit == true" (click)="EditPost(posts)" class="fa fa-check"></i>
+                <i *ngIf="posts.post.isEdit == true" (click)="CancelEditPost(posts)" class="fa fa-close"></i>
+
+              </div>
                 </div>
                 <div class="row">
                   <div class="col">
-                    <p>{{ posts.post.description }}</p>
+                    <p *ngIf="posts.post.isEdit != true">{{ posts.post.description }}</p>
+                    <textarea [(ngModel)]="editDescription" *ngIf="posts.post.isEdit == true" style="width: 100%;" autofocus>{{ posts.post.description }}</textarea>
                   </div>
                 </div>
               </div>

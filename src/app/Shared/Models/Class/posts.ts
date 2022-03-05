@@ -13,4 +13,5 @@ export class Posts implements IPosts {
   isLiked: boolean
   isFollow: boolean
   commentsCounter: number
+  isEdit: boolean
 }

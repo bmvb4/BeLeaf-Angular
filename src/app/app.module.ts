@@ -17,6 +17,7 @@ import { PostCreateComponent } from './Application/post-create/post-create.compo
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ProfileComponent } from './Application/profile/profile.component';
+import {NgxImageCompressService} from "ngx-image-compress";
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,7 @@ import { ProfileComponent } from './Application/profile/profile.component';
     InfiniteScrollModule,
     NgbModule
   ],
-  providers: [],
+  providers: [NgxImageCompressService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

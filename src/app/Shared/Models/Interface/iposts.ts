@@ -10,6 +10,6 @@ export interface IPosts {
   isLiked: boolean
   isFollow: boolean
   commentsCounter: number
-
+  isEdit:boolean
   commentsExpanded: boolean // only for UI
 }

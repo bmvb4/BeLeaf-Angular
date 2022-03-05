@@ -42,6 +42,7 @@ export class GuardService {
       },
       (error) => {
         console.error(error.body)
+        this.router.navigate(['./login']);
       },
     )
     return false;
