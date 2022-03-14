@@ -10,19 +10,22 @@ const USER_KEY:any = 'auth-user';
   providedIn: 'root'
 })
 export class GuardService {
-  private tokenStorage: TokenService;
   myUserCache: any = localStorage.getItem(USER_KEY);
+
   myUser:User = this.myUserCache !== null ? JSON.parse(this.myUserCache) : new User();
-  constructor(private router: Router, private apiService: AccountServicesService) { }
+  constructor(private router: Router, private apiService: AccountServicesService, private tokenStorage: TokenService) { }
   private tokenExpired(token: string) {
     const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
     return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    const myAccessToken: any = this.tokenStorage.getToken();
+    const myRefreshToken: any = this.tokenStorage.getRefreshToken();
+
     console.log(localStorage.getItem(USER_KEY));
     if (localStorage.getItem(USER_KEY)) {
-      if(this.myUser.accessToken){
-        if (this.tokenExpired(this.myUser.accessToken)) {
+      if(myAccessToken){
+        if (this.tokenExpired(myAccessToken)) {
           console.log("token expired!");
        } else {
            console.log("token is expired!");
@@ -32,19 +35,23 @@ export class GuardService {
 
     }
     var myToken = new Token();
-    myToken.accessToken = this.myUser.accessToken;
-    myToken.refreshToken = this.myUser.refreshToken;
+    myToken.accessToken = myAccessToken;
+    myToken.refreshToken = myRefreshToken;
 
     this.apiService.RefreshToken(myToken).subscribe(
       (resp) => {
         console.log("update")
         console.log(resp.body)
+        this.tokenStorage.saveToken(resp.body?.accessToken || "");
+        this.tokenStorage.saveRefreshToken(resp.body?.refreshToken || "");
+        return true;
       },
       (error) => {
         console.error(error.body)
         this.router.navigate(['./login']);
+        return false;
       },
     )
-    return false;
+      return true;
 }
 }

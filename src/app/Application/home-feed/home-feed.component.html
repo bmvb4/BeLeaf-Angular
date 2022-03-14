@@ -631,14 +631,13 @@
                                       <div class="row">
                                         <div class="col">
                                           <textarea
-                                            ng-trim="true"
                                             style="
                                               width: 99%;
                                               height: 90%;
                                               margin: 10px 5px;
-                                            "
+                                           "
+                                           [(ngModel)]="postcomments.commentText"
                                           >
-                                            {{postcomments.commentText}}
                                           </textarea>
                                         </div>
                                       </div>

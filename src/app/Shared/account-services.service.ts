@@ -244,7 +244,10 @@ export class AccountServicesService {
       'Content-Type': 'application/json'
     })
 
-    const body = JSON.stringify(token)
+    const body = {
+      AccessToken: token.accessToken,
+      RefreshToken: token.refreshToken
+    };
     var url = maniUrl + '/token/refresh'
     return this.http.post<IToken>(url, body, {
       headers: myheaders,

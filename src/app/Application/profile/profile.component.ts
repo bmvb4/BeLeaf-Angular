@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AccountServicesService } from 'src/app/Shared/account-services.service'
 import { Follow } from 'src/app/Shared/Models/Class/follow';
 import { GetComment } from 'src/app/Shared/Models/Class/getcomment';
@@ -33,19 +34,20 @@ export class ProfileComponent implements OnInit {
   myUserCache: any = localStorage.getItem(USER_KEY)
   myUser: any =
     this.myUserCache !== null ? JSON.parse(this.myUserCache) : new User()
-  constructor(private actRoute: ActivatedRoute, private apiService: AccountServicesService) {
+  constructor(private actRoute: ActivatedRoute, private apiService: AccountServicesService, private location: Location) {
     this.UserId = this.actRoute.snapshot.params.id;
    }
-  
+
   ngOnInit(): void {
     console.log(this.UserId)
     this.apiService.GetUserProfile(this.UserId).subscribe(
       (resp) => {
         this.userProfile = <IProfiles>resp.body
-        
+
       },
       (error) => {
         console.error(error)
+        this.location.back()
       },
     )
     this.apiService.GetUserPost(this.UserId, this.page).subscribe(
@@ -81,7 +83,7 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  
+
   EditComment(comment: GetComment) {
     comment.isEdit = comment.isEdit == true ? false : true
     console.log(comment.commentText)
