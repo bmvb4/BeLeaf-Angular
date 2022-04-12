@@ -21,7 +21,9 @@ import { Token } from './Models/Class/token'
 import { IToken } from './Models/Interface/itoken'
 import { Posts } from './Models/Class/posts'
 //var maniUrl = 'http://localhost:5201'
-var maniUrl = 'http://159.65.94.122'
+//var maniUrl = 'https://159.65.94.122'
+var maniUrl = 'https://beleaf.me'
+
 @Injectable({
   providedIn: 'root',
 })
@@ -35,6 +37,17 @@ export class AccountServicesService {
     const body = JSON.stringify(user)
     console.log(body)
     var url = maniUrl + '/register'
+    return this.http.post<IUser>(url, body, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
+  ConfirmEmail(code:any, username:any): Observable<HttpResponse<IUser>> {
+    const myheaders = new HttpHeaders({ 'Content-Type': 'application/json' })
+
+    const body = "";
+    var url = maniUrl + '/email/ConfirmEmail?Username='+username+'&code='+code;
     return this.http.post<IUser>(url, body, {
       headers: myheaders,
       observe: 'response',
@@ -250,6 +263,21 @@ export class AccountServicesService {
     };
     var url = maniUrl + '/token/refresh'
     return this.http.post<IToken>(url, body, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
+  ProfileUpdate(user: User): Observable<HttpResponse<IUser>> {
+    console.log(this.tokenStorage.getToken)
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenStorage.getToken()}`,
+    })
+
+    const body = JSON.stringify(user)
+    var url = maniUrl + '/profile/'+user.username;
+    return this.http.put<IUser>(url, body, {
       headers: myheaders,
       observe: 'response',
       responseType: 'json',

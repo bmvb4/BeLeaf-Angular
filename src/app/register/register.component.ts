@@ -42,13 +42,15 @@ export class RegisterComponent implements OnInit {
     newUser.lastName = this.f.lastName.value;
     newUser.username = this.f.username.value;
     newUser.password = this.f.password.value;
+    newUser.email = this.f.email.value;
 
     this.apiService.Register(newUser).subscribe(resp => {
       console.log(resp.body)
       newUser = <IUser>resp.body
       console.log(newUser)
 
-    },error => {
+    },(error) => {
+      console.error(error);
       this.loading = false;
     });
 

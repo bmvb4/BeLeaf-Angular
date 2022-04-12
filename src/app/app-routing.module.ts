@@ -9,10 +9,12 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { PostCreateComponent } from './Application/post-create/post-create.component';
 import { GuardService } from './Shared/_guard/guard.service'
 import { ProfileComponent } from './Application/profile/profile.component';
+import { EmailComponent } from './register/email/email.component';
 HomeFeedComponent
 const routes: Routes = [
   { path: 'login', component:LoginComponent},
   { path: 'register', component: RegisterComponent },
+  { path: 'email/:username/:code', component: EmailComponent },
   { path:'', redirectTo:'/feed', pathMatch:'full'},
   { path:'',component:MenuComponent, canActivate: [GuardService], children:[{
     path:'feed', component:HomeFeedComponent, canActivate: [GuardService] },

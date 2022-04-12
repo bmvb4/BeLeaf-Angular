@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
       console.log(this.tokenStorage.getUser());
       this.router.navigate(['./feed']);
     }, error => {
+      console.log(error);
       this.loading = false;
     });
 

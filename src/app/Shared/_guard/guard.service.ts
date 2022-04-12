@@ -22,7 +22,6 @@ export class GuardService {
     const myAccessToken: any = this.tokenStorage.getToken();
     const myRefreshToken: any = this.tokenStorage.getRefreshToken();
 
-    console.log(localStorage.getItem(USER_KEY));
     if (localStorage.getItem(USER_KEY)) {
       if(myAccessToken){
         if (this.tokenExpired(myAccessToken)) {

@@ -18,6 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ProfileComponent } from './Application/profile/profile.component';
 import {NgxImageCompressService} from "ngx-image-compress";
+import { EmailComponent } from './register/email/email.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import {NgxImageCompressService} from "ngx-image-compress";
     PostCreateComponent,
     SafeHtmlPipe,
     ProfileComponent,
+    EmailComponent,
   ],
   imports: [
     BrowserModule,

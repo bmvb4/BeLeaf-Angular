@@ -596,6 +596,10 @@
                                         <div
                                           class="col d-md-flex my-auto justify-content-md-start align-items-md-center"
                                         >
+                                        <i   *ngIf="
+                                        postcomments.idUser ==
+                                          this.myUser.username
+                                        "class="fa fa-check" aria-hidden="true"></i>
                                           <i
                                             *ngIf="
                                             postcomments.idUser ==
