@@ -18,6 +18,7 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
 import { ProfileComponent } from './Application/profile/profile.component';
 import {NgxImageCompressService} from "ngx-image-compress";
 import { EmailComponent } from './register/email/email.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { EmailComponent } from './register/email/email.component';
     SafeHtmlPipe,
     ProfileComponent,
     EmailComponent,
+    PagenotfoundComponent,
   ],
   imports: [
     BrowserModule,

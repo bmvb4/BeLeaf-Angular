@@ -9,6 +9,7 @@ import { PostCreateComponent } from './Application/post-create/post-create.compo
 import { GuardService } from './Shared/_guard/guard.service'
 import { ProfileComponent } from './Application/profile/profile.component';
 import { EmailComponent } from './register/email/email.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 HomeFeedComponent
 const routes: Routes = [
   { path: 'login', component:LoginComponent},
@@ -20,7 +21,8 @@ const routes: Routes = [
     {path:'settings', component:SettingsComponent, canActivate: [GuardService]},
     {path:'profile', component:ProfileComponent, canActivate: [GuardService]},
     {path:'profile/:id', component:ProfileComponent, canActivate: [GuardService]},
-    {path:'create', component:PostCreateComponent, canActivate: [GuardService]}]}
+    {path:'create', component:PostCreateComponent, canActivate: [GuardService]}]},
+    { path: '**', pathMatch: 'full', component: PagenotfoundComponent }
 
 ];
 
