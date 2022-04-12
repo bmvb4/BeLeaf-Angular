@@ -61,10 +61,10 @@
  <div class="sidebar-wrapper ">
   <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
-      <a href="#" [routerLink]="['/profile']" class="simple-text logo-mini">
+      <a href="#" [routerLink]="['/profile/',username]" class="simple-text logo-mini">
         <img src="data:image/png;base64,{{userPhoto}}" class="profileimage " />
       </a>
-      <a href="#" [routerLink]="['/profile']" class="simple-text logo-normal">
+      <a href="#" [routerLink]="['/profile/',username]" class="simple-text logo-normal">
         {{username}}
       </a>
     </div>
@@ -137,7 +137,7 @@
               <a class="nav-link btn-rotate" href="javascript:void(0)">
                 <i class="nc-icon nc-settings-gear-65"></i>
                 <p>
-                  <span class="d-lg-none d-md-block"><a href="#" [routerLink]="['/profile']">Settings</a></span>
+                  <span class="d-lg-none d-md-block"><a href="#" [routerLink]="['/profile/',username]">Settings</a></span>
                 </p>
               </a>
             </li>

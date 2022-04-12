@@ -10,7 +10,6 @@ import { RegisterComponent } from './register/register.component';
 import { MenuComponent } from './Application/menu/menu.component';
 import { HomeFeedComponent } from './Application/home-feed/home-feed.component';
 import { SettingsComponent } from './settings/settings.component';
-import { MyProfileComponent } from './my-profile/my-profile.component';
 import { ShortNumberPipe } from './pipes/short-number.pipe';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { PostCreateComponent } from './Application/post-create/post-create.component';
@@ -27,7 +26,6 @@ import { EmailComponent } from './register/email/email.component';
     MenuComponent,
     HomeFeedComponent,
     SettingsComponent,
-    MyProfileComponent,
     ShortNumberPipe,
     PostCreateComponent,
     SafeHtmlPipe,

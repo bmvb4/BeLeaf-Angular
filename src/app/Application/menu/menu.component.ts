@@ -10,34 +10,32 @@ export interface RouteInfo {
   class: string
 }
 
-export const ROUTES: RouteInfo[] = [
-  { path: '/profile', title: 'Profile', icon: 'nc-circle-10', class: '' },
-  { path: '/feed', title: 'Feed', icon: 'nc-bullet-list-67', class: '' },
-  { path: '/create', title: 'Post', icon: 'nc-cloud-upload-94', class: '' },
-]
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
-  userPhoto: any
-  username: any
   tokenStorage: TokenService
   location: Location
   private toggleButton: any
   private sidebarVisible: boolean = false
   public isCollapsed = true
+  myUserData = localStorage.getItem(USER_KEY)
+  myUser = this.myUserData !== null ? JSON.parse(this.myUserData) : new User()
+  userPhoto = this.myUser.photo
+  username = this.myUser.username
   constructor() {}
   public menuItems: any[]
+  ROUTES: RouteInfo[] = [
+    { path: '/profile/'+this.username, title: 'Profile', icon: 'nc-circle-10', class: '' },
+    { path: '/feed', title: 'Feed', icon: 'nc-bullet-list-67', class: '' },
+    { path: '/create', title: 'Post', icon: 'nc-cloud-upload-94', class: '' },
+  ]
   ngOnInit(): void {
-    this.menuItems = ROUTES.filter((menuItem) => menuItem)
+    this.menuItems = this.ROUTES.filter((menuItem) => menuItem)
 
-    let myUser = localStorage.getItem(USER_KEY)
-    let test = myUser !== null ? JSON.parse(myUser) : new User()
-    console.log(test)
-    this.userPhoto = test.photo
-    this.username = test.username
   }
 
   sidebarToggle() {

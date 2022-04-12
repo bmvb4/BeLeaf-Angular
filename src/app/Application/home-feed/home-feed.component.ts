@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormBuilder } from '@angular/forms'
 import { AccountServicesService } from 'src/app/Shared/account-services.service'
 import { IPosts } from 'src/app/Shared/Models/Interface/iposts'
@@ -20,6 +20,8 @@ const USER_KEY: any = 'auth-user'
   styleUrls: ['./home-feed.component.css'],
 })
 export class HomeFeedComponent implements OnInit {
+  @Input() stateFeed = false;
+  @Input() userIdProfile = "";
   editDescription: string
   IsLoadingPost = true
   postsGet: IPosts[] = []
@@ -38,25 +40,44 @@ export class HomeFeedComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.IsLoadingPost = true
-    this.apiService.GetLastPost(this.page).subscribe(
-      (resp) => {
-        this.posts = <IPosts>resp.body
-        this.posts.forEach((p: IPosts) => {
-          if (p.photo.length >= 1) {
-            this.postsGet.push(p)
-            this.GetComments(p)
-          }
-        })
-        console.log(this.postsGet)
-        this.IsLoadingPost = false
-      },
-      (error) => {
-        console.error(error)
+    if(!this.stateFeed){
+      this.apiService.GetLastPost(this.page).subscribe(
+        (resp) => {
+          this.posts = <IPosts>resp.body
+          this.posts.forEach((p: IPosts) => {
+            if (p.photo.length >= 1) {
+              this.postsGet.push(p)
+              this.GetComments(p)
+            }
+          })
+          console.log(this.postsGet)
+          this.IsLoadingPost = false
+        },
+        (error) => {
+          console.error(error)
 
-        this.IsLoadingPost = false
+          this.IsLoadingPost = false
 
-      },
-    )
+        },
+      )
+    }else{
+      this.apiService.GetUserPost(this.userIdProfile, this.page).subscribe(
+        (resp) => {
+          this.posts = <IPosts>resp.body
+          this.posts.forEach((p: IPosts) => {
+            if (p.photo.length >= 1) {
+              this.postsGet.push(p)
+              this.GetComments(p)
+            }
+          })
+          console.log(this.postsGet)
+        },
+        (error) => {
+          console.error(error)
+        },
+      )
+    }
+
   }
   GetComments(post: IPosts) {
     this.apiService.GetComments(post.idPost, 0).subscribe(

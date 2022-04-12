@@ -1,4 +1,4 @@
-<div class="container db-social">
+<div *ngIf="userProfile.username!=myUser.username" class="container db-social">
   <div class="jumbotron jumbotron-fluid"></div>
   <div class="container-fluid">
       <div class="row justify-content-center">
@@ -41,8 +41,8 @@
                           <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
                               <div class="follow">
                                 <ng-container *ngIf="userProfile.isFollow; then follow; else unfollow"></ng-container>
-                                <ng-template #follow><a class="btn btn-shadow" ><i class="la la-user-plus"></i>Unfollow</a></ng-template>
-                                <ng-template #unfollow><a class="btn btn-shadow" ><i class="la la-user-plus"></i>Follow</a></ng-template>
+                                <ng-template #follow><a class="btn btn-shadow" (click)="followUser()"><i class="la la-user-plus"></i>Unfollow</a></ng-template>
+                                <ng-template #unfollow><a class="btn btn-shadow" (click)="followUser()"><i class="la la-user-plus"></i>Follow</a></ng-template>
                               </div>
                           </div>
                       </div>
@@ -51,6 +51,116 @@
           </div>
       </div>
   </div>
+</div>
+<div *ngIf="userProfile.username==myUser.username" class="container db-social" >
+  <div class="jumbotron jumbotron-fluid"></div>
+  <div class="container-fluid "*ngIf="isEditProfile === false">
+      <div class="row justify-content-center">
+          <div class="col-xl-11">
+              <div class="widget head-profile has-shadow">
+                  <div class="widget-body pb-0">
+                      <div class="row d-flex align-items-center">
+                          <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+                            <div class="row">
+                              <ul>
+                                <li>
+                                    <div class="counter">{{30 | shortNumber}}</div>
+                                    <div class="heading">Posts</div>
+                                </li>
+                                <li>
+                                    <div class="counter">{{34000| shortNumber}}</div>
+                                    <div class="heading">Followers</div>
+                                </li>
+                                <li>
+                                    <div class="counter">{{1 | shortNumber}}</div>
+                                    <div class="heading">Followed</div>
+                                </li>
+                            </ul>
+                            </div>
+
+                          </div>
+                          <div class="col-xl-4 col-md-4 d-flex justify-content-center">
+                            <div class="row">
+                              <div class="image-default" style="text-align: center;">
+                                <img class="rounded-circle" src="data:image/png;base64,{{ myUser.photo }}" alt="...">
+                            </div>
+                            <div class="infos">
+                                <h2>{{myUser.firstName}}&nbsp;{{myUser.lastName}}</h2>
+                                <div class="location">@{{myUser.username}}</div>
+                                <div class="location">{{myUser.description}}</div>
+                            </div>
+                            </div>
+
+                          </div>
+                          <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
+                              <div class="follow">
+                                <a class="btn btn-shadow" (click)="editProfile()"><i class="la la-user-plus"></i>Edit</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container-fluid "*ngIf="isEditProfile === true">
+    <div class="row justify-content-center">
+        <div class="col-xl-11">
+            <div class="widget head-profile has-shadow">
+                <div class="widget-body pb-0">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+                          <div class="row">
+                            <ul>
+                              <li>
+                                  <div class="counter">{{30 | shortNumber}}</div>
+                                  <div class="heading">Posts</div>
+                              </li>
+                              <li>
+                                  <div class="counter">{{34000| shortNumber}}</div>
+                                  <div class="heading">Followers</div>
+                              </li>
+                              <li>
+                                  <div class="counter">{{1 | shortNumber}}</div>
+                                  <div class="heading">Followed</div>
+                              </li>
+                          </ul>
+                          </div>
+
+                        </div>
+                        <div class="col-xl-4 col-md-4 d-flex justify-content-center">
+                          <div class="row">
+                            <div class="image-default" style="text-align: center;position: relative;">
+
+                              <img class="rounded-circle" *ngIf="imageSrc" [src]="imageSrc" alt="...">
+                              <img class="rounded-circle" *ngIf="!imageSrc" src="data:image/png;base64,{{ myUser.photo }}" alt="...">
+                              <div class="fa fa-upload iconPhotos" onclick="document.getElementById('selectedFile').click();" >
+                                <input class="form-control" id="selectedFile" type="file" accept="image/*" style="margin-top: 10px;margin-bottom: 10px; display: none;"  (change)="onFileChange($event)">
+                                        <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+                                            <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>
+                                        </div>
+                              </div>
+
+                          </div>
+
+                          <div class="infos">
+                            <textarea [(ngModel)]="myUser.firstName"></textarea>&nbsp;<textarea [(ngModel)]="myUser.lastName"></textarea>
+                            <div class="location">@{{myUser.username}}</div>
+                            <div class="location"><textarea [(ngModel)]="myUser.description"></textarea></div>
+                          </div>
+                          </div>
+
+                        </div>
+                        <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
+                            <div class="follow">
+                              <a class="btn btn-shadow" (click)="editProfilPut()"><i class="la la-user-plus"></i>Accept</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- <div class="container card">
     <div class="row "  >
@@ -83,409 +193,4 @@
     </div>
 </div> -->
 <!-- posts -->
-<div infinite-scroll (scrolled)="onScrollDown($event)">
-    <div class="container mt-5 mb-5" *ngFor="let posts of PostCommets">
-      <div class="d-flex align-items-center justify-content-center">
-        <div class="card shadow-lg" style="max-width: 600px">
-          <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <div class="container" style="margin: 0px; padding: 0px">
-                  <div class="row">
-                    <div
-                      class="col-sm-2 col-md-3 text-center d-sm-flex justify-content-sm-center align-items-sm-center"
-                    >
-                      <img
-                        class="rounded-circle img-fluid"
-                        src="data:image/png;base64,{{ posts.post.userPhoto }}"
-                        style="
-                          border-radius: 194;
-                          border-top-left-radius: -11px;
-                          margin-top: 5px;
-                          margin-bottom: 5px;
-                        "
-                        width="80"
-                        height="80"
-                      />
-                    </div>
-                    <div class="col-auto text-start">
-                      <i
-                        class="form-control-plaintext d-sm-flex justify-content-sm-start"
-                        style="
-                          font-weight: bold;
-                          font-family: 'Noto Sans JP', sans-serif;
-                          font-size: 17px;
-                          height: 22.8px;
-                          margin-top: 10px;
-                        "
-                        >{{ posts.post.idUser }}
-                      </i>
-                        <ng-container
-                          *ngIf="posts.post.isFollow; then follow; else unfollow"
-                        ></ng-container>
-                        <ng-template #follow
-                          ><i
-                            class="form-control-plaintext"
-                            (click)="followUser(this.posts.post)"
-                            style="
-                              color: var(--bs-blue);
-                              font-style: italic;
-                              font-size: 14px;
-                              font-family: 'Noto Sans JP', sans-serif;
-                              width: 92px;
-                              height: 16.8px;
-                              margin-top: 10px;
-                            "
-                            >Following</i
-                          ></ng-template
-                        >
-                        <ng-template #unfollow
-                          ><i (click)="followUser(this.posts.post)"
-                            >Follow</i
-                          ></ng-template
-                        >
-                      </div>
-                      <div
-                                        class="col-sm-4 col-md-3 col-xxl-4 d-sm-flex justify-content-sm-end align-items-sm-center"
-
-                    >
-                      <i
-                        class="form-control-plaintext d-sm-flex"
-                        style="text-align: right; font-size: 14px"
-                        >{{
-                          formatDate(posts.post.deleteDate)
-                            | date: "yyyy-MM-dd HH:mm"
-                        }}</i
-                      >
-                    </div>
-                    <div
-                    class="col-sm-1 col-md-3 col-xxl-1 d-sm-flex justify-content-sm-center align-items-sm-center"
-
-                  >
-                    <div
-                      class="nav-item btn-rotate"
-                      ngbDropdown
-                      placement="bottom-left"
-                    >
-                      <a ngbDropdownToggle>
-                        <p class="fa fa-ellipsis-v"></p>
-                      </a>
-                      <div
-                        ngbDropdownMenu
-                      >
-                        <p ngbDropdownItem class="fa fa-pencil">   Edit</p>
-                        <p ngbDropdownItem class="fa fa-trash">Delete</p>
-                      </div>
-                    </div>
-                  </div>
-                    </div>
-
-
-                  </div>
-                  <div class="row" #ImageRow>
-                    <div
-                      class="col d-xxl-flex flex-fill justify-content-xxl-center align-items-xxl-center"
-                    >
-                      <img
-                        class=" d-block shadow-sm" style="width: 600px;"
-                        src="data:image/png;base64,{{ posts.post.photo }}"
-                      />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <ng-container
-                      *ngIf="!posts.post.isLiked; then liked; else unliked"
-                    ></ng-container>
-                    <ng-template #liked>
-                      <div
-                        class="col-sm-1 col-xxl-2 d-sm-flex justify-content-sm-center align-items-sm-center justify-content-xxl-end"
-                        style="margin-left: 20px"
-                        (dblclick)="like(this.posts.post)"
-                      >
-                        <i class="fa fa-heart-o"></i>
-                      </div>
-                    </ng-template>
-                    <ng-template #unliked>
-                      <div
-                        class="col-sm-1 col-xxl-2 d-sm-flex justify-content-sm-center align-items-sm-center justify-content-xxl-end"
-                        style="margin-left: 20px"
-                        (dblclick)="like(this.posts.post)"
-                      >
-                        <i class="fa fa-heart"></i>
-                      </div>
-                    </ng-template>
-                    <div
-                      class="col-sm-3 col-xxl-2 d-sm-flex me-auto justify-content-sm-start"
-                      style="padding: 0px"
-                    >
-                      <p class="form-control-plaintext" readonly="">
-                        {{ posts.post.likesCounter | shortNumber }}
-                      </p>
-                    </div>
-                    <div
-                      class="col-sm-1 d-sm-flex justify-content-sm-center align-items-sm-center"
-                    >
-                      <i class="fa fa-comments-o"></i>
-                    </div>
-                    <div
-                      class="col mx-auto"
-                      style="padding-right: 0px; padding-left: 0px"
-                    >
-                      <p class="form-control-plaintext" readonly="">
-                        {{ posts.post.commentsCounter | shortNumber }}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <p>{{ posts.post.description }}</p>
-                    </div>
-                  </div>
-                </div>
-                <!-- аркоедеон -->
-                <div class="accordion">
-                  <div class="accordion-item">
-                    <div class="col">
-                      <p class="accordion-header" id="headingOne">
-                        <button
-                          class="accordion-button"
-                          type="button"
-                          (click)="expandAccordion(posts.post)"
-                          [ngClass]="
-                            posts.post.commentsExpanded ? '' : 'collapsed'
-                          "
-                        >
-                          Comments
-                        </button>
-                      </p>
-                    </div>
-                    <div
-                      class="accordion-collapse collapse"
-                      [ngClass]="posts.post.commentsExpanded ? 'show' : ''"
-                    >
-                      <div class="accordion-body">
-                        <div class="col-md-12">
-                          <div
-                            class="scrollme"
-                            style="
-                              height: 150px;
-                              border: #66615b solid 1px;
-                              margin-bottom: 5px;
-                            "
-                          >
-                            <table class="table table-striped">
-                              <tbody class="scrollbar scrollbar-primary">
-                                <tr *ngFor="let postcomments of posts.comments">
-                                  <td style="padding: 5px 7px">
-                                    <!-- isEdit  == false-->
-                                    <div *ngIf="postcomments.isEdit !== true">
-                                      <div class="container" style="padding: 0px">
-                                        <div class="row">
-                                          <div
-                                            class="col-md-1 d-md-flex justify-content-md-center align-items-md-center"
-                                            style="
-                                              height: auto;
-                                              padding-left: 0px;
-                                              padding-right: 0px;
-                                              margin-right: 6px;
-                                            "
-                                          >
-                                            <img
-                                              class="rounded-circle img-fluid"
-                                              src="data:image/png;base64,{{
-                                                postcomments.userPhoto
-                                              }}"
-                                              style="width: 35px; height: 35px"
-                                            />
-                                          </div>
-                                          <div
-                                            class="col-md-auto justify-content-md-start align-items-md-center"
-                                            style="margin-right: 8px"
-                                          >
-                                            <p
-                                              style="
-                                                font-weight: bold;
-                                                margin-top: 16px;
-                                              "
-                                            >
-                                              {{ postcomments.idUser }}
-                                            </p>
-                                          </div>
-                                          <div
-                                            class="col d-md-flex my-auto justify-content-md-start align-items-md-center"
-                                          >
-                                            <i
-                                              *ngIf="
-                                                posts.post.idUser ==
-                                                this.myUser.username
-                                              "
-                                              class="fa fa-pencil flex-wrap"
-                                              style="
-                                                font-size: 20px;
-                                                color: #ef8157;
-                                              "
-                                              (dblclick)="
-                                                EditComment(this.postcomments)
-                                              "
-                                            ></i>
-                                          </div>
-                                          <div
-                                            class="col-md-auto d-md-flex my-auto float-right justify-content-md-end align-items-md-center"
-                                          >
-                                            <i
-                                              *ngIf="
-                                                posts.post.idUser ==
-                                                this.myUser.username
-                                              "
-                                              style="font-size: 20px; color: red"
-                                              class="fa fa-remove d-md-flex ms-auto justify-content-md-end align-items-md-center"
-                                              (dblclick)="
-                                                DeleteComment(
-                                                  this.postcomments,
-                                                  posts
-                                                )
-                                              "
-                                            ></i>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="container" style="padding: 0px">
-                                        <div class="row">
-                                          <div class="col-md-12">
-                                            <p style="margin: 10px 5px">
-                                              {{ postcomments.commentText }}
-                                            </p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <!-- isEdit = true -->
-                                    <div *ngIf="postcomments.isEdit === true">
-                                      <div class="container" style="padding: 0px">
-                                        <div class="row">
-                                          <div
-                                            class="col-md-1 d-md-flex justify-content-md-center align-items-md-center"
-                                            style="
-                                              height: auto;
-                                              padding-left: 0px;
-                                              padding-right: 0px;
-                                              margin-right: 6px;
-                                            "
-                                          >
-                                            <img
-                                              class="rounded-circle img-fluid"
-                                              src="data:image/png;base64,{{
-                                                postcomments.userPhoto
-                                              }}"
-                                              style="width: 35px; height: 35px"
-                                            />
-                                          </div>
-                                          <div
-                                            class="col-md-auto justify-content-md-start align-items-md-center"
-                                            style="margin-right: 8px"
-                                          >
-                                            <p
-                                              style="
-                                                font-weight: bold;
-                                                margin-top: 16px;
-                                              "
-                                            >
-                                              {{ postcomments.idUser }}
-                                            </p>
-                                          </div>
-                                          <div
-                                            class="col d-md-flex my-auto justify-content-md-start align-items-md-center"
-                                          >
-                                            <i
-                                              *ngIf="
-                                                posts.post.idUser ==
-                                                this.myUser.username
-                                              "
-                                              class="fa fa-remove flex-wrap"
-                                              style="
-                                                font-size: 20px;
-                                                color: #ef8157;
-                                              "
-                                              (dblclick)="
-                                                EditComment(this.postcomments)
-                                              "
-                                            ></i>
-                                          </div>
-                                          <div
-                                            class="col-md-auto d-md-flex my-auto float-right justify-content-md-end align-items-md-center"
-                                          >
-                                            <p
-                                              *ngIf="
-                                                posts.post.idUser ==
-                                                this.myUser.username
-                                              "
-                                              style="font-size: 20px; color: red"
-                                              class="fa fa-pencil d-md-flex ms-auto justify-content-md-end align-items-md-center"
-                                            >
-                                              Editing
-                                            </p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="container" style="padding: 0px">
-                                        <div class="row">
-                                          <div class="col">
-                                            <textarea
-                                              ng-trim="false"
-                                              style="
-                                                width: 99%;
-                                                height: 90%;
-                                                margin: 10px 5px;
-                                              "
-                                            >
-                                              {{ postcomments.commentText }}
-                                            </textarea>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                        <div class="container">
-                          <div class="row">
-                            <div class="col-md-8" style="padding: 0px">
-                              <textarea
-                                #commentTextArea
-                                class="form-control d-xxl-flex justify-content-xxl-end align-items-xxl-end"
-                              ></textarea>
-                            </div>
-                            <div
-                              class="d-grid gap-2 col-md-3 mx-auto justify-content-md-end"
-                              style="padding: opx"
-                            >
-                              <button
-                                (click)="
-                                  MakeComment(posts, commentTextArea.value);
-                                  commentTextArea.value = ''
-                                "
-                                class="btn-primary btn-sm"
-                                style="margin: 0% !important"
-                                type="reset"
-                              >
-                                Comment
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!--  краи аркоедеон -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- end test2 -->
-    </div>
+<app-home-feed [stateFeed]="true" [userIdProfile]="UserId"></app-home-feed>
