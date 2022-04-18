@@ -22,7 +22,7 @@ import { IToken } from './Models/Interface/itoken'
 import { Posts } from './Models/Class/posts'
 //var maniUrl = 'http://localhost:5201'
 //var maniUrl = 'https://159.65.94.122'
-var maniUrl = 'https://beleaf.me'
+var maniUrl = 'https://beleaf.me/api'
 
 @Injectable({
   providedIn: 'root',

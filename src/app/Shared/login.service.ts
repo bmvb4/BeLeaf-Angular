@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx'
 import { IUser } from './Models/Interface/iuser'
 //var maniUrl = 'http://localhost:5201'
 //var maniUrl = 'https://159.65.94.122'
-var maniUrl = 'https://beleaf.me'
+var maniUrl = 'https://beleaf.me/api'
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
