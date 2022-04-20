@@ -58,8 +58,8 @@
 </div>
 </div>
  -->
- <div class="sidebar-wrapper ">
-  <div class="sidebar" data-color="white" data-active-color="danger">
+ <div class="sidebar-wrapper" >
+  <div class="sidebar" data-color="white" data-active-color="danger" (click)="sidebarClose()">
     <div class="logo">
       <a href="#" [routerLink]="['/profile/',username]" class="simple-text logo-mini">
         <img src="data:image/png;base64,{{userPhoto}}" class="profileimage " />
@@ -155,13 +155,8 @@
     </nav>
 
     <!-- End Navbar -->
-    <div class="content mw-100" style="margin: 0px; ">
-      <div class="row">
-        <div class="col-md-12">
-            <router-outlet></router-outlet>
-
-        </div>
-      </div>
+    <div class="" style="margin-top: 20px;">
+        <router-outlet></router-outlet>
     </div>
   </div>
 </div>

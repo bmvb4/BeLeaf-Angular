@@ -117,16 +117,18 @@ export class ProfileComponent implements OnInit {
     this.updateUser.description = this.myUser.description
     this.updateUser.firstName = this.myUser.firstName
     this.updateUser.lastName = this.myUser.lastName
-    if(image!=null || image!=""){
+    console.log(image.length<1)
+    if(image.length>1){
       this.updateUser.photo = image
     }else{
-      this.updateUser.photo = this.myUser.photo
+      this.updateUser.photo = this.myUser.photo;
     }
-    console.log(image);
+
     this.apiService.ProfileUpdate(this.updateUser).subscribe(resp => {
       this.tokenStorage.saveUser(resp.body);
       this.userPhoto = resp.body?.photo;
       this.isEditProfile = (this.isEditProfile)?false:true;
+      window.location.reload()
     }, error => {
       console.log(error);
     });

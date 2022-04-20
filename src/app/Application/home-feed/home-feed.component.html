@@ -1,5 +1,5 @@
 <div infinite-scroll (scrolled)="onScrollDown($event)">
-  <div class="container mt-5 mb-5" *ngFor="let posts of PostCommets; let postIndex=index">
+  <div class="container " *ngFor="let posts of PostCommets; let postIndex=index">
     <!-- test -->
     <!-- <div class="d-flex align-items-center justify-content-center">
       <div class="card shadow-lg" style="max-width: 800px">
@@ -283,11 +283,11 @@
       <div class="card shadow-lg" style="width: 600px">
         <div class="card-body">
           <div class="row">
-            <div class="col">
+            <div class="col ">
               <div class="container" style="margin: 0px; padding: 0px">
                 <div class="row">
                   <div
-                    class="col-sm-2 col-md-3 text-center d-sm-flex justify-content-sm-center align-items-sm-center"
+                    class="col-3 text-center d-flex justify-content-center align-items-center"
                   >
                     <img [routerLink]="['/profile/', posts.post.idUser]"
                       class="rounded-circle img-fluid"
@@ -302,7 +302,7 @@
                       height="80"
                     />
                   </div>
-                  <div class="col-sm-5 col-md-3 col-xxl-4 text-start">
+                  <div class="col-3  text-start">
                     <i
                       class="form-control-plaintext d-sm-flex justify-content-sm-start"
                       [routerLink]="['/profile/', posts.post.idUser]"
@@ -343,10 +343,10 @@
                     </div>
                   </div>
                   <div
-                    class="col-sm-4 col-md-3 col-xxl-4 d-sm-flex justify-content-sm-end align-items-sm-center"
+                    class="col-3 d-flex justify-content-end align-items-center"
                   >
                     <i
-                      class="form-control-plaintext d-sm-flex"
+                      class="form-control-plaintext d-flex"
                       style="text-align: right; font-size: 14px"
                       >{{
                         formatDate(posts.post.deleteDate)
@@ -355,7 +355,7 @@
                     >
                   </div>
                   <div *ngIf="posts.post.idUser == this.myUser.username"
-                    class="col-sm-1 col-md-3 col-xxl-1 d-sm-flex justify-content-sm-center align-items-sm-center"
+                    class="col-3 d-flex justify-content-center align-items-center"
                   >
                     <div
                       class="nav-item btn-rotate"
@@ -376,7 +376,7 @@
                 </div>
                 <div class="row" #ImageRow>
                   <div
-                    class="col d-xxl-flex flex-fill justify-content-xxl-center align-items-xxl-center"
+                    class="col d-flex flex-fill justify-content-center align-items-center"
                   >
                     <img
                       class=" d-block shadow-sm" style="width: 600px;"
@@ -390,7 +390,7 @@
                   ></ng-container>
                   <ng-template #liked>
                     <div
-                      class="col-sm-1 col-xxl-2 d-sm-flex justify-content-sm-center align-items-sm-center justify-content-xxl-end"
+                      class="col-1 d-flex justify-content-center align-items-center justify-content-end"
                       style="margin-left: 20px"
                       (dblclick)="like(this.posts.post)"
                     >
@@ -399,7 +399,7 @@
                   </ng-template>
                   <ng-template #unliked>
                     <div
-                      class="col-sm-1 col-xxl-2 d-sm-flex justify-content-sm-center align-items-sm-center justify-content-xxl-end"
+                      class="col-1 d-flex justify-content-center align-items-center justify-content-end"
                       style="margin-left: 20px"
                       (dblclick)="like(this.posts.post)"
                     >
@@ -407,7 +407,7 @@
                     </div>
                   </ng-template>
                   <div
-                    class="col-sm-3 col-xxl-2 d-sm-flex me-auto justify-content-sm-start"
+                    class="col-3 d-flex me-auto justify-content-start"
                     style="padding: 0px"
                   >
                     <p class="form-control-plaintext" readonly="">
@@ -415,7 +415,7 @@
                     </p>
                   </div>
                   <div
-                    class="col-sm-1 d-sm-flex justify-content-sm-center align-items-sm-center"
+                    class="col-1 d-flex justify-content-center align-items-center"
                   >
                     <i class="fa fa-comments-o"></i>
                   </div>
@@ -428,7 +428,7 @@
                     </p>
                   </div>
                   <div
-                  class="col-sm-1 d-sm-flex justify-content-sm-center align-items-sm-center"
+                  class="col-1 d-flex justify-content-center align-items-center"
                 >
                 <i *ngIf="posts.post.isEdit == true" (click)="EditPost(posts)" class="fa fa-check"></i>
                 <i *ngIf="posts.post.isEdit == true" (click)="CancelEditPost(posts)" class="fa fa-close"></i>
@@ -464,7 +464,7 @@
                     [ngClass]="posts.post.commentsExpanded ? 'show' : ''"
                   >
                     <div class="accordion-body">
-                      <div class="col-md-12">
+                      <div class="col-12">
                         <div
                           class="scrollme"
                           style="
@@ -482,7 +482,7 @@
                                     <div class="container" style="padding: 0px">
                                       <div class="row">
                                         <div
-                                          class="col-md-1 d-md-flex justify-content-md-center align-items-md-center"
+                                          class="col d-flex align-items-center"
                                           style="
                                             height: auto;
                                             padding-left: 0px;
@@ -499,7 +499,7 @@
                                           />
                                         </div>
                                         <div
-                                          class="col-md-auto justify-content-md-start align-items-md-center"
+                                          class="col-auto justify-content-start align-items-center"
                                           style="margin-right: 8px"
                                         >
                                           <p
@@ -512,7 +512,7 @@
                                           </p>
                                         </div>
                                         <div
-                                          class="col d-md-flex my-auto justify-content-md-start align-items-md-center"
+                                          class="col d-flex my-auto justify-content-start align-items-center"
                                         >
                                           <i
                                             *ngIf="
@@ -530,7 +530,7 @@
                                           ></i>
                                         </div>
                                         <div
-                                          class="col-md-auto d-md-flex my-auto float-right justify-content-md-end align-items-md-center"
+                                          class="col-auto d-flex my-auto float-right justify-content-end align-items-center"
                                         >
                                           <i
                                             *ngIf="
@@ -538,7 +538,7 @@
                                               this.myUser.username
                                             "
                                             style="font-size: 20px; color: red"
-                                            class="fa fa-remove d-md-flex ms-auto justify-content-md-end align-items-md-center"
+                                            class="fa fa-remove d-flex ms-auto justify-content-end align-items-center"
                                             (dblclick)="
                                               DeleteComment(
                                                 this.postcomments,
@@ -551,7 +551,7 @@
                                     </div>
                                     <div class="container" style="padding: 0px">
                                       <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-12">
                                           <p style="margin: 10px 5px">
                                             {{ postcomments.commentText }}
                                           </p>
@@ -564,7 +564,7 @@
                                     <div class="container" style="padding: 0px">
                                       <div class="row">
                                         <div
-                                          class="col-md-1 d-md-flex justify-content-md-center align-items-md-center"
+                                          class="col-1 d-flex justify-content-center align-items-center"
                                           style="
                                             height: auto;
                                             padding-left: 0px;
@@ -581,7 +581,7 @@
                                           />
                                         </div>
                                         <div
-                                          class="col-md-auto justify-content-md-start align-items-md-center"
+                                          class="col-auto justify-content-start align-items-center"
                                           style="margin-right: 8px"
                                         >
                                           <p
@@ -594,7 +594,7 @@
                                           </p>
                                         </div>
                                         <div
-                                          class="col d-md-flex my-auto justify-content-md-start align-items-md-center"
+                                          class="col d-flex my-auto justify-content-start align-items-center"
                                         >
                                         <i   *ngIf="
                                         postcomments.idUser ==
@@ -616,7 +616,7 @@
                                           ></i>
                                         </div>
                                         <div
-                                          class="col-md-auto d-md-flex my-auto float-right justify-content-md-end align-items-md-center"
+                                          class="col-auto d-flex my-auto float-right justify-content-end align-items-center"
                                         >
                                           <p
                                             *ngIf="
@@ -624,7 +624,7 @@
                                               this.myUser.username
                                             "
                                             style="font-size: 20px; color: red"
-                                            class="fa fa-pencil d-md-flex ms-auto justify-content-md-end align-items-md-center"
+                                            class="fa fa-pencil d-flex ms-auto justify-content-end align-items-center"
                                           >
                                             Editing
                                           </p>
@@ -658,11 +658,11 @@
                           <div class="col-md-8" style="padding: 0px">
                             <textarea
                               #commentTextArea
-                              class="form-control d-xxl-flex justify-content-xxl-end align-items-xxl-end"
+                              class="form-control d-flex justify-content-end align-items-end"
                             ></textarea>
                           </div>
                           <div
-                            class="d-grid gap-2 col-md-3 mx-auto justify-content-md-end"
+                            class="d-grid gap-2 col-3 mx-auto justify-content-end"
                             style="padding: opx"
                           >
                             <button

@@ -2,30 +2,29 @@
   <div class="jumbotron jumbotron-fluid"></div>
   <div class="container-fluid">
       <div class="row justify-content-center">
-          <div class="col-xl-11">
+          <div class="col">
               <div class="widget head-profile has-shadow">
                   <div class="widget-body pb-0">
                       <div class="row d-flex align-items-center">
-                          <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+                          <div class="col col-md-3  text-center d-flex justify-content-start justify-content-center">
                             <div class="row">
-                              <ul>
-                                <li>
-                                    <div class="counter">{{userProfile.postCount | shortNumber}}</div>
-                                    <div class="heading">Posts</div>
-                                </li>
-                                <li>
+
+                                <div class="col">
                                     <div class="counter">{{userProfile.follower | shortNumber}}</div>
                                     <div class="heading">Followers</div>
-                                </li>
-                                <li>
+                                </div>
+                                <div class="col">
                                     <div class="counter">{{userProfile.followed | shortNumber}}</div>
                                     <div class="heading">Followed</div>
-                                </li>
-                            </ul>
+                                </div>
+                                <div class="col">
+                                  <div class="counter">{{userProfile.postCount | shortNumber}}</div>
+                                  <div class="heading">Posts</div>
+                              </div>
                             </div>
 
                           </div>
-                          <div class="col-xl-4 col-md-4 d-flex justify-content-center">
+                          <div class="col col-md-6 d-flex justify-content-center">
                             <div class="row">
                               <div class="image-default" style="text-align: center;">
                                 <img class="rounded-circle" src="data:image/png;base64,{{ userProfile.photo }}" alt="...">
@@ -38,7 +37,7 @@
                             </div>
 
                           </div>
-                          <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
+                          <div class="col col-md-3 d-flex  justify-content-end justify-content-center">
                               <div class="follow">
                                 <ng-container *ngIf="userProfile.isFollow; then follow; else unfollow"></ng-container>
                                 <ng-template #follow><a class="btn btn-shadow" (click)="followUser()"><i class="la la-user-plus"></i>Unfollow</a></ng-template>
@@ -52,50 +51,47 @@
       </div>
   </div>
 </div>
-<div *ngIf="userProfile.username==myUser.username" class="container db-social" >
+<div *ngIf="userProfile.username==myUser.username && isEditProfile === false" class="container db-social" >
   <div class="jumbotron jumbotron-fluid"></div>
-  <div class="container-fluid "*ngIf="isEditProfile === false">
+  <div class="container-fluid">
       <div class="row justify-content-center">
-          <div class="col-xl-11">
+          <div class="col">
               <div class="widget head-profile has-shadow">
                   <div class="widget-body pb-0">
                       <div class="row d-flex align-items-center">
-                          <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+                          <div class="col col-md-3  text-center d-flex justify-content-start justify-content-center">
                             <div class="row">
-                              <ul>
-                                <li>
-                                    <div class="counter">{{30 | shortNumber}}</div>
-                                    <div class="heading">Posts</div>
-                                </li>
-                                <li>
-                                    <div class="counter">{{34000| shortNumber}}</div>
+
+                                <div class="col">
+                                    <div class="counter">{{userProfile.follower | shortNumber}}</div>
                                     <div class="heading">Followers</div>
-                                </li>
-                                <li>
-                                    <div class="counter">{{1 | shortNumber}}</div>
+                                </div>
+                                <div class="col">
+                                    <div class="counter">{{userProfile.followed | shortNumber}}</div>
                                     <div class="heading">Followed</div>
-                                </li>
-                            </ul>
+                                </div>
+                                <div class="col">
+                                  <div class="counter">{{userProfile.postCount | shortNumber}}</div>
+                                  <div class="heading">Posts</div>
+                              </div>
                             </div>
 
                           </div>
-                          <div class="col-xl-4 col-md-4 d-flex justify-content-center">
+                          <div class="col col-md-6 d-flex justify-content-center">
                             <div class="row">
                               <div class="image-default" style="text-align: center;">
-                                <img class="rounded-circle" src="data:image/png;base64,{{ myUser.photo }}" alt="...">
+                                <img class="rounded-circle" src="data:image/png;base64,{{ userProfile.photo }}" alt="...">
                             </div>
                             <div class="infos">
-                                <h2>{{myUser.firstName}}&nbsp;{{myUser.lastName}}</h2>
-                                <div class="location">@{{myUser.username}}</div>
-                                <div class="location">{{myUser.description}}</div>
+                                <h2>{{userProfile.firstName}}&nbsp;{{userProfile.lastName}}</h2>
+                                <div class="location">@{{userProfile.username}}</div>
+                                <div class="location">{{userProfile.description}}</div>
                             </div>
                             </div>
 
                           </div>
-                          <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
-                              <div class="follow">
-                                <a class="btn btn-shadow" (click)="editProfile()"><i class="la la-user-plus"></i>Edit</a>
-                              </div>
+                          <div class="col col-md-3 d-flex justify-content-end justify-content-center">
+                                <a class="btn btn-shadow text-center" type="button" (click)="editProfile()" style="width: 80%;"><i class="fa fa-pencil text-center">Edit</i></a>
                           </div>
                       </div>
                   </div>
@@ -103,32 +99,34 @@
           </div>
       </div>
   </div>
-  <div class="container-fluid "*ngIf="isEditProfile === true">
-    <div class="row justify-content-center">
-        <div class="col-xl-11">
-            <div class="widget head-profile has-shadow">
-                <div class="widget-body pb-0">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
-                          <div class="row">
-                            <ul>
-                              <li>
-                                  <div class="counter">{{30 | shortNumber}}</div>
-                                  <div class="heading">Posts</div>
-                              </li>
-                              <li>
-                                  <div class="counter">{{34000| shortNumber}}</div>
-                                  <div class="heading">Followers</div>
-                              </li>
-                              <li>
-                                  <div class="counter">{{1 | shortNumber}}</div>
-                                  <div class="heading">Followed</div>
-                              </li>
-                          </ul>
-                          </div>
+</div>
+  <div class="container db-social" *ngIf="isEditProfile === true">
+    <div class="jumbotron jumbotron-fluid"></div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="widget head-profile has-shadow">
+                    <div class="widget-body pb-0">
+                        <div class="row d-flex align-items-center">
+                            <div class="col col-md-3  text-center d-flex justify-content-start justify-content-center">
+                              <div class="row">
 
-                        </div>
-                        <div class="col-xl-4 col-md-4 d-flex justify-content-center">
+                                  <div class="col">
+                                      <div class="counter">{{userProfile.follower | shortNumber}}</div>
+                                      <div class="heading">Followers</div>
+                                  </div>
+                                  <div class="col">
+                                      <div class="counter">{{userProfile.followed | shortNumber}}</div>
+                                      <div class="heading">Followed</div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="counter">{{userProfile.postCount | shortNumber}}</div>
+                                    <div class="heading">Posts</div>
+                                </div>
+                              </div>
+
+                            </div>
+                        <div class="col col-md-6 d-flex justify-content-center">
                           <div class="row">
                             <div class="image-default" style="text-align: center;position: relative;">
 
@@ -151,16 +149,15 @@
                           </div>
 
                         </div>
-                        <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
-                            <div class="follow">
+                        <div class="col col-md-3 d-flex justify-content-end justify-content-center">
                               <a class="btn btn-shadow" (click)="editProfilPut()"><i class="la la-user-plus"></i>Accept</a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- <div class="container card">
     <div class="row "  >

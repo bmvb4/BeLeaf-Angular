@@ -1,15 +1,15 @@
-p {
+/* p {
     font-size: medium;
-  }
+  } */
 
-  .row {
+  /* .row {
     --bs-gutter-x: 0rem !important;
   }
   .scrollme {
     overflow-x: auto;
   }
   /* Scroll 1 */
-  .scrollme::-webkit-scrollbar {
+  /* .scrollme::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
@@ -23,7 +23,7 @@ p {
   }
   .dropdown-toggle::after {
     display: none;
-  }
+  } */
 
 
 
@@ -85,11 +85,11 @@ p {
 .widget-body {
     padding: 1.4rem;
 }
-.pb-0, .py-0 {
+/* .pb-0, .py-0 {
     padding-bottom: 0!important;
-}
+} */
 .db-social .image-default img {
-    width: 120px;
+    max-width: 200px;
 
     left: 0;
     right: 0;
@@ -113,9 +113,7 @@ p {
     color: #aea9c3;
     font-size: 1rem;
 }
-.db-social .follow .btn {
-    padding: 10px 30px;
-}
+
 .btn:not(:disabled):not(.disabled) {
     cursor: pointer;
 }
@@ -136,20 +134,12 @@ p {
 }
 
 
-.db-social .head-profile li:first-child {
-    padding-left: 0;
-}
-.db-social .head-profile li {
-    display: inline-block;
-    text-align: center;
-    padding: 0 1rem;
-}
-.db-social .head-profile li .counter {
+.db-social .head-profile .counter {
     color: #2c304d;
-    font-size: 1.4rem;
+    font-size: 2.8vh;
     font-weight: 600;
 }
-.db-social .head-profile li .heading {
+.db-social .head-profile .heading {
     color: #aea9c3;
-    font-size: 1rem;
+    font-size: 2vh;
 }

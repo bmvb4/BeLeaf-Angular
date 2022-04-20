@@ -39,11 +39,9 @@ export class MenuComponent implements OnInit {
   }
 
   sidebarToggle() {
-    console.log('Side bar is ' + this.sidebarVisible)
     if (this.sidebarVisible === false) {
       this.sidebarOpen()
     } else {
-      console.log('fuck you ' + this.sidebarVisible)
       this.sidebarClose()
     }
   }
@@ -53,7 +51,6 @@ export class MenuComponent implements OnInit {
     const mainPanel = <HTMLElement>(
       document.getElementsByClassName('main-panel')[0]
     )
-    console.log('Open menu!!!')
     html.classList.add('nav-open')
     this.sidebarVisible = true
   }
