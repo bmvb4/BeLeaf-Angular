@@ -132,7 +132,7 @@
 
                               <img class="rounded-circle" *ngIf="imageSrc" [src]="imageSrc" alt="...">
                               <img class="rounded-circle" *ngIf="!imageSrc" src="data:image/png;base64,{{ myUser.photo }}" alt="...">
-                              <div class="fa fa-upload iconPhotos" onclick="document.getElementById('selectedFile').click();" >
+                              <div class="fa fa-upload iconPhotos" (click)="compressFile()" >
                                 <input class="form-control" id="selectedFile" type="file" accept="image/*" style="margin-top: 10px;margin-bottom: 10px; display: none;"  (change)="onFileChange($event)">
                                         <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
                                             <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>

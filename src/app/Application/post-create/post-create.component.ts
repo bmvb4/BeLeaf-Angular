@@ -5,7 +5,7 @@ import { AccountServicesService } from 'src/app/Shared/account-services.service'
 import { NewPost } from 'src/app/Shared/Models/Class/new-post';
 import { Posts } from 'src/app/Shared/Models/Class/posts';
 import { User } from 'src/app/Shared/Models/Class/user';
-
+import {NgxImageCompressService} from "ngx-image-compress";
 const USER_KEY: any = 'auth-user';
 @Component({
   selector: 'app-post-create',
@@ -22,7 +22,7 @@ export class PostCreateComponent implements OnInit {
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required])
   });
-  constructor(private apiService: AccountServicesService, private router: Router) { }
+  constructor(private apiService: AccountServicesService, private router: Router, private imageCompress: NgxImageCompressService) { }
 
   ngOnInit() {
     let myUserStorage = localStorage.getItem(USER_KEY);
@@ -52,7 +52,19 @@ export class PostCreateComponent implements OnInit {
 
       }
     }
-
+    compressFile() {
+      const MAX_MEGABYTE = 2;
+      this.imageCompress
+        .uploadAndGetImageWithMaxSize(MAX_MEGABYTE) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
+        .then(
+          (result: string) => {
+            this.imageSrc = result;
+          },
+          (result: string) => {
+            console.error('The compression algorithm didn\'t succed! The best size we can do is', this.imageCompress.byteCount(result), 'bytes')
+            this.imageSrc = result;
+          });
+    }
   submit(description:string) {
     this.loading = true;
     console.log(this.myForm.value.fileSource);

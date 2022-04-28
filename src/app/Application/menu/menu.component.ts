@@ -25,6 +25,7 @@ export class MenuComponent implements OnInit {
   myUserData = localStorage.getItem(USER_KEY)
   myUser = this.myUserData !== null ? JSON.parse(this.myUserData) : new User()
   userPhoto = this.myUser.photo
+  hideSideNav: boolean = false;
   username = this.myUser.username
   constructor() {}
   public menuItems: any[]
@@ -37,11 +38,11 @@ export class MenuComponent implements OnInit {
     this.menuItems = this.ROUTES.filter((menuItem) => menuItem)
 
   }
-
   sidebarToggle() {
     if (this.sidebarVisible === false) {
       this.sidebarOpen()
     } else {
+      console.log('fuck you ' + this.sidebarVisible)
       this.sidebarClose()
     }
   }
@@ -51,6 +52,7 @@ export class MenuComponent implements OnInit {
     const mainPanel = <HTMLElement>(
       document.getElementsByClassName('main-panel')[0]
     )
+    console.log('Open menu!!!')
     html.classList.add('nav-open')
     this.sidebarVisible = true
   }

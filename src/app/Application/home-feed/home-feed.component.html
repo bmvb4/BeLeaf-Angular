@@ -1,4 +1,4 @@
-<div infinite-scroll (scrolled)="onScrollDown($event)">
+<div infinite-scroll (scrolled)="onScrollDown($event)" style="scroll-behavior: unset;">
   <div class="container " *ngFor="let posts of PostCommets; let postIndex=index">
     <!-- test -->
     <!-- <div class="d-flex align-items-center justify-content-center">
@@ -379,7 +379,7 @@
                     class="col d-flex flex-fill justify-content-center align-items-center"
                   >
                     <img
-                      class=" d-block shadow-sm" style="width: 600px;"
+                      class=" d-block img-fluid shadow-sm" style="width: 600px;"
                       src="data:image/png;base64,{{ posts.post.photo }}"
                     />
                   </div>

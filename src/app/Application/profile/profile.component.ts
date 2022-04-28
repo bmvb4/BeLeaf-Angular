@@ -11,6 +11,7 @@ import { IPosts } from 'src/app/Shared/Models/Interface/iposts';
 import { IProfiles } from 'src/app/Shared/Models/Interface/iprofiles';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TokenService } from 'src/app/Shared/token.service';
+import { NgxImageCompressService } from 'ngx-image-compress';
 const USER_KEY: any = 'auth-user'
 @Component({
   selector: 'app-profile',
@@ -32,14 +33,14 @@ export class ProfileComponent implements OnInit {
   comments: any
   isLike: any
   UserId:string;
-  userProfile: Profiles;
+  userProfile: any;
   page = 0
   isEditProfile = false;
   myUserCache: any = localStorage.getItem(USER_KEY)
   myUser: any =
     this.myUserCache !== null ? JSON.parse(this.myUserCache) : new User()
     updateUser:any = this.myUser
-  constructor(private router: Router,private actRoute: ActivatedRoute, private apiService: AccountServicesService, private location: Location,private tokenStorage: TokenService) {
+  constructor(private router: Router,private actRoute: ActivatedRoute, private apiService: AccountServicesService, private location: Location,private tokenStorage: TokenService,private imageCompress: NgxImageCompressService) {
     this.UserId = this.actRoute.snapshot.params.id;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
@@ -110,6 +111,19 @@ export class ProfileComponent implements OnInit {
   }
   editProfile(){
     this.isEditProfile = (this.isEditProfile)?false:true;
+  }
+  compressFile() {
+    const MAX_MEGABYTE = 2;
+    this.imageCompress
+      .uploadAndGetImageWithMaxSize(MAX_MEGABYTE) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
+      .then(
+        (result: string) => {
+          this.imageSrc = result;
+        },
+        (result: string) => {
+          console.error('The compression algorithm didn\'t succed! The best size we can do is', this.imageCompress.byteCount(result), 'bytes')
+          this.imageSrc = result;
+        });
   }
   editProfilPut(){
     var removePosition = this.myForm.value.fileSource.indexOf(',');

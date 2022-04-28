@@ -88,9 +88,9 @@
                             <div class="col">
                                     <div class="col"><p class="form-control-plaintext" type="text" style="text-align: center;font-weight: bold;font-style: italic;font-size: 16px;"> {{myUser.firstName}} {{myUser.lastName}}</p></div>
                                     <div class="col"><p class="form-control-plaintext" type="text" style="text-align: center;font-weight: bold;font-size: 16px;">{{myUser.username}}</p></div>
-                                    <div class="col">  <img  class="img-thumbnail" data-bs-toggle="tooltip" data-bss-tooltip="" [src]="imageSrc" onclick="document.getElementById('selectedFile').click();" *ngIf="imageSrc" style="margin-bottom: 10px;">
+                                    <div class="col">  <img  class="img-thumbnail" data-bs-toggle="tooltip" data-bss-tooltip="" [src]="imageSrc" (click)="compressFile();" *ngIf="imageSrc" style="margin-bottom: 10px;">
 
-                                        <img #defautImage class="img-thumbnail" data-bs-toggle="tooltip" data-bss-tooltip="" src="../../../assets/image/upload.png" onclick="document.getElementById('selectedFile').click();" *ngIf="!imageSrc" style="margin-bottom: 10px;">
+                                        <img #defautImage class="img-thumbnail" data-bs-toggle="tooltip" data-bss-tooltip="" src="../../../assets/image/upload.png" (click)="compressFile()" *ngIf="!imageSrc" style="margin-bottom: 10px;">
 
                                         <input class="form-control" id="selectedFile" type="file" accept="image/*" style="margin-top: 10px;margin-bottom: 10px; display: none;"  (change)="onFileChange($event)">
                                         <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">

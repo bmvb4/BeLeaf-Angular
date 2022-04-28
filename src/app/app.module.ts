@@ -19,6 +19,7 @@ import { ProfileComponent } from './Application/profile/profile.component';
 import {NgxImageCompressService} from "ngx-image-compress";
 import { EmailComponent } from './register/email/email.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     FormsModule,
     ReactiveFormsModule,
     InfiniteScrollModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
   ],
   providers: [NgxImageCompressService],
   bootstrap: [AppComponent]
