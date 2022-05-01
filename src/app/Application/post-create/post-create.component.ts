@@ -25,7 +25,7 @@ export class PostCreateComponent implements OnInit {
   constructor(private apiService: AccountServicesService, private router: Router, private imageCompress: NgxImageCompressService) { }
 
   ngOnInit() {
-    let myUserStorage = localStorage.getItem(USER_KEY);
+    let myUserStorage = sessionStorage.getItem(USER_KEY);
 
     this.myUser = myUserStorage !== null ? JSON.parse(myUserStorage) : new User();
   }
@@ -67,10 +67,9 @@ export class PostCreateComponent implements OnInit {
     }
   submit(description:string) {
     this.loading = true;
-    console.log(this.myForm.value.fileSource);
     var newPost = new NewPost();
-    var removePosition = this.myForm.value.fileSource.indexOf(',');
-    var image = this.myForm.value.fileSource.substring(removePosition + 1);
+    var removePosition = this.imageSrc.indexOf(',');
+    var image = this.imageSrc.substring(removePosition + 1);
     newPost.photo = image;
     newPost.idUser = this.myUser.username;
     newPost.description = description;

@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   userProfile: any;
   page = 0
   isEditProfile = false;
-  myUserCache: any = localStorage.getItem(USER_KEY)
+  myUserCache: any = sessionStorage.getItem(USER_KEY)
   myUser: any =
     this.myUserCache !== null ? JSON.parse(this.myUserCache) : new User()
     updateUser:any = this.myUser

@@ -11,12 +11,12 @@ export class TokenService {
   constructor() { }
   public signOut(): void {
     console.log("GG")
-    localStorage.clear();
+    sessionStorage.clear();
   }
 
   public saveToken(token: string): void {
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.setItem(TOKEN_KEY, token);
+    sessionStorage.removeItem(TOKEN_KEY);
+    sessionStorage.setItem(TOKEN_KEY, token);
 
     const user = this.getUser();
     if (user.id) {
@@ -25,27 +25,27 @@ export class TokenService {
   }
 
   public getToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    return sessionStorage.getItem(TOKEN_KEY);
   }
 
   public saveRefreshToken(token: string): void {
-    localStorage.removeItem(REFRESHTOKEN_KEY);
-    localStorage.setItem(REFRESHTOKEN_KEY, token);
+    sessionStorage.removeItem(REFRESHTOKEN_KEY);
+    sessionStorage.setItem(REFRESHTOKEN_KEY, token);
   }
 
   public getRefreshToken(): string | null {
-    return localStorage.getItem(REFRESHTOKEN_KEY);
+    return sessionStorage.getItem(REFRESHTOKEN_KEY);
   }
 
   public saveUser(user: any): void {
-    localStorage.removeItem(USER_KEY);
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
+    sessionStorage.removeItem(USER_KEY);
+    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
     console.log("Go login and kill yourself!!!");
 
   }
 
   public getUser(): any {
-    const user = localStorage.getItem(USER_KEY);
+    const user = sessionStorage.getItem(USER_KEY);
     if (user) {
       return JSON.parse(user);
     }
