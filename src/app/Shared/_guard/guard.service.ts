@@ -10,7 +10,7 @@ const USER_KEY:any = 'auth-user';
   providedIn: 'root'
 })
 export class GuardService {
-  myUserCache: any = sessionStorage.getItem(USER_KEY);
+  myUserCache: any = localStorage.getItem(USER_KEY);
 
   myUser:User = this.myUserCache !== null ? JSON.parse(this.myUserCache) : new User();
   constructor(private router: Router, private apiService: AccountServicesService, private tokenStorage: TokenService) { }
@@ -22,7 +22,7 @@ export class GuardService {
     const myAccessToken: any = this.tokenStorage.getToken();
     const myRefreshToken: any = this.tokenStorage.getRefreshToken();
 
-    if (sessionStorage.getItem(USER_KEY)) {
+    if (localStorage.getItem(USER_KEY)) {
       if(myAccessToken){
         if (this.tokenExpired(myAccessToken)) {
           console.log("token expired!");

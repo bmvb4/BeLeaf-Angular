@@ -11,12 +11,12 @@ export class TokenService {
   constructor() { }
   public signOut(): void {
     console.log("GG")
-    sessionStorage.clear();
+    localStorage.clear();
   }
 
   public saveToken(token: string): void {
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.setItem(TOKEN_KEY, token);
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.setItem(TOKEN_KEY, token);
 
     const user = this.getUser();
     if (user.id) {
@@ -25,21 +25,21 @@ export class TokenService {
   }
 
   public getToken(): string | null {
-    return sessionStorage.getItem(TOKEN_KEY);
+    return localStorage.getItem(TOKEN_KEY);
   }
 
   public saveRefreshToken(token: string): void {
-    sessionStorage.removeItem(REFRESHTOKEN_KEY);
-    sessionStorage.setItem(REFRESHTOKEN_KEY, token);
+    localStorage.removeItem(REFRESHTOKEN_KEY);
+    localStorage.setItem(REFRESHTOKEN_KEY, token);
   }
 
   public getRefreshToken(): string | null {
-    return sessionStorage.getItem(REFRESHTOKEN_KEY);
+    return localStorage.getItem(REFRESHTOKEN_KEY);
   }
 
   public saveUser(user: any): void {
-    sessionStorage.removeItem(USER_KEY);
-    sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+    localStorage.removeItem(USER_KEY);
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
   }
   public saveEmailUsername(user: string): void {
     sessionStorage.removeItem("Email-Send");
@@ -49,7 +49,7 @@ export class TokenService {
     return sessionStorage.getItem("Email-Send");
   }
   public getUser(): any {
-    const user = sessionStorage.getItem(USER_KEY);
+    const user = localStorage.getItem(USER_KEY);
     if (user) {
       return JSON.parse(user);
     }

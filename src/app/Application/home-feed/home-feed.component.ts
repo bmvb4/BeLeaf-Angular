@@ -31,7 +31,7 @@ export class HomeFeedComponent implements OnInit {
   comments: any
   isLike: any
   page = 0
-  myUserCache: any = sessionStorage.getItem(USER_KEY)
+  myUserCache: any = localStorage.getItem(USER_KEY)
   myUser: any =
     this.myUserCache !== null ? JSON.parse(this.myUserCache) : new User()
   constructor(
