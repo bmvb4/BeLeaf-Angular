@@ -5,6 +5,8 @@ import { ApiService } from '../Shared/login.service';
 import { IUser } from '../Shared/Models/Interface/iuser';
 import { User } from '../Shared/Models/Class/user';
 import { TokenService } from '../Shared/token.service';
+import { AccountServicesService } from '../Shared/account-services.service';
+
 const USER_KEY:any = 'auth-user';
 
 @Component({
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   constructor(
     private apiService: ApiService,
+    private apiServices: AccountServicesService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -45,17 +48,29 @@ export class LoginComponent implements OnInit {
     var usr = new User();
     usr.username = this.f.username.value;
     usr.password = this.f.password.value;
-
     this.apiService.Login(usr).subscribe(resp => {
-      console.log(resp.body)
-      const jsonUser = JSON.stringify(resp.body)
-      this.tokenStorage.saveToken(resp.body?.accessToken || "");
-      this.tokenStorage.saveRefreshToken(resp.body?.refreshToken || "");
-      this.tokenStorage.saveUser(resp.body);
-      console.log(this.tokenStorage.getToken());
       usr = <IUser>resp.body;
-      console.log(this.tokenStorage.getUser());
-      this.router.navigate(['./feed']);
+      if(usr.emailConfirm === false){
+        this.tokenStorage.saveEmailUsername(this.f.username.value);
+        usr.username = this.f.username.value;
+        this.apiServices.GenerateEmail(usr).subscribe(
+          resp=>{
+            this.loading = false;
+          },(error) => {
+            console.error(error.error);
+            this.loading = false;
+          });
+        this.router.navigate(['./resend']);
+      }else{
+        this.tokenStorage.saveToken(resp.body?.accessToken || "");
+        this.tokenStorage.saveRefreshToken(resp.body?.refreshToken || "");
+        this.tokenStorage.saveUser(resp.body);
+        console.log(this.tokenStorage.getToken());
+
+        console.log(this.tokenStorage.getUser());
+        this.router.navigate(['./feed']);
+      }
+
     }, error => {
       console.log(error);
       this.loading = false;

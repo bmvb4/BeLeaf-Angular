@@ -45,12 +45,22 @@ export class RegisterComponent implements OnInit {
     newUser.email = this.f.email.value;
 
     this.apiService.Register(newUser).subscribe(resp => {
-      console.log(resp.body)
       newUser = <IUser>resp.body
-      console.log(newUser)
+      this.apiService.GenerateEmail(newUser).subscribe(
+        resp=>{
+          this.router.navigate(['./resent']);
+        },(error) => {
+          console.error(error);
+          console.error(error.body);
+          this.loading = false;
+        }
 
+      );
+      this.router.navigate(['./resent']);
     },(error) => {
+      console.error("Register Fail!!!");
       console.error(error);
+      console.error(error.body);
       this.loading = false;
     });
 

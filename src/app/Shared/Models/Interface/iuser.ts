@@ -7,4 +7,5 @@ export interface IUser {
   photo:any;
   accessToken:string;
   refreshToken:string;
+  emailConfirm:boolean;
 }

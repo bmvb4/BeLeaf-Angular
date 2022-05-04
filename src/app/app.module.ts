@@ -20,6 +20,7 @@ import {NgxImageCompressService} from "ngx-image-compress";
 import { EmailComponent } from './register/email/email.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GenerateEmailComponent } from './Application/generate-email/generate-email.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProfileComponent,
     EmailComponent,
     PagenotfoundComponent,
+    GenerateEmailComponent,
   ],
   imports: [
     BrowserModule,

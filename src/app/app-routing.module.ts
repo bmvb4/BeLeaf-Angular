@@ -10,10 +10,12 @@ import { GuardService } from './Shared/_guard/guard.service'
 import { ProfileComponent } from './Application/profile/profile.component';
 import { EmailComponent } from './register/email/email.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { GenerateEmailComponent } from './Application/generate-email/generate-email.component';
 HomeFeedComponent
 const routes: Routes = [
   { path: 'login', component:LoginComponent},
   { path: 'register', component: RegisterComponent },
+  { path: 'resend', component: GenerateEmailComponent },
   { path: 'email/:username/:code', component: EmailComponent },
   { path:'', redirectTo:'/feed', pathMatch:'full'},
   { path:'',component:MenuComponent, canActivate: [GuardService], children:[{

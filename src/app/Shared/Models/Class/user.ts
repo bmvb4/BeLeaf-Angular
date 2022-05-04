@@ -10,4 +10,5 @@ export class User implements IUser {
   photo:any;
   accessToken:string;
   refreshToken:string;
+  emailConfirm: boolean;
 }

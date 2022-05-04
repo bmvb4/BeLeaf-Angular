@@ -40,10 +40,14 @@ export class TokenService {
   public saveUser(user: any): void {
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-    console.log("Go login and kill yourself!!!");
-
   }
-
+  public saveEmailUsername(user: string): void {
+    sessionStorage.removeItem("Email-Send");
+    sessionStorage.setItem("Email-Send",user);
+  }
+  public getEmailUsername(): string | null {
+    return sessionStorage.getItem("Email-Send");
+  }
   public getUser(): any {
     const user = sessionStorage.getItem(USER_KEY);
     if (user) {

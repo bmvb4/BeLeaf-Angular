@@ -43,6 +43,21 @@ export class AccountServicesService {
       responseType: 'json',
     })
   }
+  GenerateEmail(user:any): Observable<HttpResponse<IUser>>  {
+    console.log(user)
+    console.log(user.username)
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+
+    const body = JSON.stringify(user)
+    var url = maniUrl + '/email'
+    return this.http.post<IUser>(url, body, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
   ConfirmEmail(code:any, username:any): Observable<HttpResponse<IUser>> {
     const myheaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
