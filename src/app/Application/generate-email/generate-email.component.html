@@ -1,0 +1,7 @@
+<div>
+  <h1>You need to confirm your email. <br>Check your email for confirming link</h1>
+  <button (click)="Resend()" [disabled]="loading" class="btn btn-primary">
+    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+    Resend
+  </button>
+</div>
