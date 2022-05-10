@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
   private toggleButton: any
   private sidebarVisible: boolean = false
   public isCollapsed = true
-  myUserData = sessionStorage.getItem(USER_KEY)
+  myUserData = localStorage.getItem(USER_KEY)
   myUser = this.myUserData !== null ? JSON.parse(this.myUserData) : new User()
   userPhoto = this.myUser.photo
   hideSideNav: boolean = false;
@@ -77,6 +77,6 @@ export class MenuComponent implements OnInit {
     }
   }
   SignOut(){
-    sessionStorage.clear();
+    localStorage.clear();
   }
 }

@@ -25,7 +25,7 @@ export class PostCreateComponent implements OnInit {
   constructor(private apiService: AccountServicesService, private router: Router, private imageCompress: NgxImageCompressService) { }
 
   ngOnInit() {
-    let myUserStorage = sessionStorage.getItem(USER_KEY);
+    let myUserStorage = localStorage.getItem(USER_KEY);
 
     this.myUser = myUserStorage !== null ? JSON.parse(myUserStorage) : new User();
   }
