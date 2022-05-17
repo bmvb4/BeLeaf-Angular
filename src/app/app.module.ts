@@ -21,6 +21,10 @@ import { EmailComponent } from './register/email/email.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GenerateEmailComponent } from './Application/generate-email/generate-email.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatMenuModule} from '@angular/material/menu';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +51,9 @@ import { GenerateEmailComponent } from './Application/generate-email/generate-em
     InfiniteScrollModule,
     NgbModule,
     BrowserAnimationsModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatMenuModule
   ],
   providers: [NgxImageCompressService],
   bootstrap: [AppComponent]

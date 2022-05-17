@@ -12,4 +12,5 @@ export interface IPosts {
   commentsCounter: number
   isEdit:boolean
   commentsExpanded: boolean // only for UI
+  tags: string[]
 }

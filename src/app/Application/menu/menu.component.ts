@@ -42,7 +42,6 @@ export class MenuComponent implements OnInit {
     if (this.sidebarVisible === false) {
       this.sidebarOpen()
     } else {
-      console.log('fuck you ' + this.sidebarVisible)
       this.sidebarClose()
     }
   }

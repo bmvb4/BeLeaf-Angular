@@ -427,6 +427,17 @@
                       {{ posts.post.commentsCounter | shortNumber }}
                     </p>
                   </div>
+                  <div class="col-1 justify-content-center align-items-center text-center">
+                    <div class="dropdown ">
+                      <button class="dropbtn  fa fa-tags" >Tags</button>
+                      <div class="dropdown-content" >
+                        <div *ngFor="let tag of posts.post.tags;">
+                          <a href="/" class="disabled">{{tag}}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div
                   class="col-1 d-flex justify-content-center align-items-center"
                 >

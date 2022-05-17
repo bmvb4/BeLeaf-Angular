@@ -18,12 +18,12 @@ const routes: Routes = [
   { path: 'resend', component: GenerateEmailComponent },
   { path: 'email/:username/:code', component: EmailComponent },
   { path:'', redirectTo:'/feed', pathMatch:'full'},
-  { path:'',component:MenuComponent, canActivate: [GuardService], children:[{
-    path:'feed', component:HomeFeedComponent, canActivate: [GuardService] },
-    {path:'settings', component:SettingsComponent, canActivate: [GuardService]},
-    {path:'profile', component:ProfileComponent, canActivate: [GuardService]},
-    {path:'profile/:id', component:ProfileComponent, canActivate: [GuardService]},
-    {path:'create', component:PostCreateComponent, canActivate: [GuardService]}]},
+  { path:'',component:MenuComponent, canActivate: [GuardService],runGuardsAndResolvers: 'paramsOrQueryParamsChange', children:[{
+    path:'feed', component:HomeFeedComponent, canActivate: [GuardService] ,runGuardsAndResolvers: 'paramsOrQueryParamsChange'},
+    {path:'settings', component:SettingsComponent, canActivate: [GuardService],runGuardsAndResolvers: 'paramsOrQueryParamsChange'},
+    {path:'profile', component:ProfileComponent, canActivate: [GuardService],runGuardsAndResolvers: 'paramsOrQueryParamsChange'},
+    {path:'profile/:id', component:ProfileComponent, canActivate: [GuardService],runGuardsAndResolvers: 'paramsOrQueryParamsChange'},
+    {path:'create', component:PostCreateComponent, canActivate: [GuardService],runGuardsAndResolvers: 'paramsOrQueryParamsChange'}]},
     { path: '**', pathMatch: 'full', component: PagenotfoundComponent }
 
 ];

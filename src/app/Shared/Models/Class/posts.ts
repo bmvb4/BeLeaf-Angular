@@ -14,4 +14,5 @@ export class Posts implements IPosts {
   isFollow: boolean
   commentsCounter: number
   isEdit: boolean
+  tags: string[]
 }

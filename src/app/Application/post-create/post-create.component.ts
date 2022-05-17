@@ -6,6 +6,9 @@ import { NewPost } from 'src/app/Shared/Models/Class/new-post';
 import { Posts } from 'src/app/Shared/Models/Class/posts';
 import { User } from 'src/app/Shared/Models/Class/user';
 import {NgxImageCompressService} from "ngx-image-compress";
+import {MatChipInputEvent} from '@angular/material/chips';
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+
 const USER_KEY: any = 'auth-user';
 @Component({
   selector: 'app-post-create',
@@ -17,6 +20,8 @@ export class PostCreateComponent implements OnInit {
   defautSrc: string = "./assets/upload.png";
   imageSrc: string = "";
   loading = false;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  tags:string[] = [];
   myForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     file: new FormControl('', [Validators.required]),
@@ -28,6 +33,30 @@ export class PostCreateComponent implements OnInit {
     let myUserStorage = localStorage.getItem(USER_KEY);
 
     this.myUser = myUserStorage !== null ? JSON.parse(myUserStorage) : new User();
+  }
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || "").trim() && this.tags.length < 5) {
+      console.log(value.trim())
+      if(!this.tags.includes(value.trim())){
+        this.tags.push(value.trim());
+      }
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = "";
+    }
+  }
+
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
   }
   get f() {
       return this.myForm.controls;
@@ -73,6 +102,7 @@ export class PostCreateComponent implements OnInit {
     newPost.photo = image;
     newPost.idUser = this.myUser.username;
     newPost.description = description;
+    newPost.tags = this.tags;
     console.log(removePosition);
       this.apiService.MakePost(newPost).subscribe(resp => {
         console.log(resp.body);
