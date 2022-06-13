@@ -107,14 +107,20 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
           <form>
-            <div class="input-group no-border">
-              <input type="text" value="" class="form-control" placeholder="Search...">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <i class="nc-icon nc-zoom-split"></i>
+            <div class="input-group dropdown no-border">
+              <input type="text" #inputValue (keyup)="search(inputValue.value)" class="form-control" placeholder="Search...">
+              <div *ngIf="searchUserRes" class="dropdown-content">
+                <div *ngFor="let searchUsr of searchUserRes" class="input-group-append">
+                  <div class="input-group-text">
+                    <i *ngIf="searchUsr.username" class="">{{searchUsr.username}}</i>
+                    <i *ngIf="searchUsr.TagName" class="">{{searchUsr.TagName}}</i>
+                  </div>
                 </div>
               </div>
             </div>
+
+
+
           </form>
           <ul class="navbar-nav">
             <li class="nav-item">
@@ -165,6 +171,3 @@
     </div>
   </div>
 </div>
-
-
-

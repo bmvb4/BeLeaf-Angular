@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
+import { FormControl } from '@angular/forms'
+import { isEmptyObject } from 'jquery'
+import { AccountServicesService } from 'src/app/Shared/account-services.service'
+import { Search } from 'src/app/Shared/Models/Class/search'
 import { User } from 'src/app/Shared/Models/Class/user'
+import { ISearch } from 'src/app/Shared/Models/Interface/isearch'
 import { TokenService } from 'src/app/Shared/token.service'
 
 const USER_KEY: any = 'auth-user'
@@ -17,6 +22,7 @@ export interface RouteInfo {
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
+  myControl = new FormControl;
   tokenStorage: TokenService
   location: Location
   private toggleButton: any
@@ -27,7 +33,10 @@ export class MenuComponent implements OnInit {
   userPhoto = this.myUser.photo
   hideSideNav: boolean = false;
   username = this.myUser.username
-  constructor() {}
+  public searchRes: any
+  public searchUserRes: Search[] =[]
+  public searchUser: any
+  constructor(  private apiService: AccountServicesService) {}
   public menuItems: any[]
   ROUTES: RouteInfo[] = [
     { path: '/profile/'+this.username, title: 'Profile', icon: 'nc-circle-10', class: '' },
@@ -36,6 +45,46 @@ export class MenuComponent implements OnInit {
   ]
   ngOnInit(): void {
     this.menuItems = this.ROUTES.filter((menuItem) => menuItem)
+
+  }
+  search(searchInput:string){
+    console.log(searchInput)
+    if(searchInput.length>=1 ){
+      this.searchUserRes=[];
+      this.apiService.SearchTag(searchInput).subscribe(
+        (resp) => {
+          this.searchRes = <string>resp.body;
+          this.searchRes.forEach((tag:string) => {
+            var newTag = new Search();
+            newTag.TagName = tag;
+            this.searchUserRes.push(newTag);
+          });
+        },
+        (error) => {
+          console.error(error)
+        },
+      )
+      this.apiService.SearchUser(searchInput).subscribe(
+        (resp) => {
+          this.searchUser = <ISearch>resp.body;
+          this.searchUser.forEach((usr:Search) => {
+            var newUser = new Search();
+            newUser.username = usr.username;
+            newUser.photo = usr.photo;
+            console.log(usr.username)
+              this.searchUserRes.push(newUser)
+          });
+          console.log(this.searchUserRes)
+        },
+        (error) => {
+          console.error(error)
+        },
+      )
+    }else{
+      this.searchRes="";
+      this.searchUserRes=[];
+    }
+
 
   }
   sidebarToggle() {

@@ -20,6 +20,8 @@ import { IProfiles } from './Models/Interface/iprofiles'
 import { Token } from './Models/Class/token'
 import { IToken } from './Models/Interface/itoken'
 import { Posts } from './Models/Class/posts'
+import { Search } from './Models/Class/search'
+import { ISearch } from './Models/Interface/isearch'
 //var maniUrl = 'http://localhost:5201'
 //var maniUrl = 'https://159.65.94.122'
 var maniUrl = 'https://beleaf.me/api'
@@ -35,7 +37,6 @@ export class AccountServicesService {
   Register(user: User): Observable<HttpResponse<IUser>> {
     const myheaders = new HttpHeaders({ 'Content-Type': 'application/json' })
     const body = JSON.stringify(user)
-    console.log(body)
     var url = maniUrl + '/register'
     return this.http.post<IUser>(url, body, {
       headers: myheaders,
@@ -44,8 +45,6 @@ export class AccountServicesService {
     })
   }
   GenerateEmail(user:any): Observable<HttpResponse<IUser>>  {
-    console.log(user)
-    console.log(user.username)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json'
     })
@@ -71,7 +70,6 @@ export class AccountServicesService {
   }
 
   GetLastPost(page: Number): Observable<HttpResponse<IPosts>> {
-    console.log(this.tokenStorage.getToken())
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -85,7 +83,6 @@ export class AccountServicesService {
     })
   }
   GetUserPost(UserId:string,page: Number): Observable<HttpResponse<IPosts>> {
-    console.log(this.tokenStorage.getToken())
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -99,7 +96,6 @@ export class AccountServicesService {
     })
   }
   LikePost(like: Like): Observable<HttpResponse<ILike>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -114,7 +110,6 @@ export class AccountServicesService {
     })
   }
   UnlikePost(like: Like): Observable<HttpResponse<ILike>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -129,7 +124,6 @@ export class AccountServicesService {
     })
   }
   FollowPost(follow: Follow): Observable<HttpResponse<IFollow>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -144,7 +138,6 @@ export class AccountServicesService {
     })
   }
   UnfollowPost(follow: Follow): Observable<HttpResponse<IFollow>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -159,7 +152,6 @@ export class AccountServicesService {
     })
   }
   MakePost(post: NewPost): Observable<HttpResponse<INewPost>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -174,7 +166,6 @@ export class AccountServicesService {
     })
   }
   UpdatePost(post: Posts): Observable<HttpResponse<IPosts>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -189,7 +180,6 @@ export class AccountServicesService {
     })
   }
   DeletePost(post: Posts) {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -204,7 +194,6 @@ export class AccountServicesService {
     })
   }
   MakeComment(comment: Comment): Observable<HttpResponse<IComment>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -220,7 +209,6 @@ export class AccountServicesService {
   }
 
   DeleteComment(comment: Comment) {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -239,7 +227,6 @@ export class AccountServicesService {
     postId: any,
     page: Number,
   ): Observable<HttpResponse<IGetComment>> {
-    console.log(this.tokenStorage.getToken())
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -254,7 +241,6 @@ export class AccountServicesService {
   GetUserProfile(
     userId: any,
   ): Observable<HttpResponse<IProfiles>> {
-    console.log(this.tokenStorage.getToken())
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -267,7 +253,6 @@ export class AccountServicesService {
     })
   }
   RefreshToken(token: Token): Observable<HttpResponse<IToken>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json'
     })
@@ -284,7 +269,6 @@ export class AccountServicesService {
     })
   }
   ProfileUpdate(user: User): Observable<HttpResponse<IUser>> {
-    console.log(this.tokenStorage.getToken)
     const myheaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.tokenStorage.getToken()}`,
@@ -293,6 +277,30 @@ export class AccountServicesService {
     const body = JSON.stringify(user)
     var url = maniUrl + '/profile/'+user.username;
     return this.http.put<IUser>(url, body, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
+  SearchTag(search :String): Observable<HttpResponse<string>> {
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenStorage.getToken()}`,
+    })
+    var url = maniUrl + '/search/tag/' + search;
+    return this.http.get<string>(url, {
+      headers: myheaders,
+      observe: 'response',
+      responseType: 'json',
+    })
+  }
+  SearchUser(search :String): Observable<HttpResponse<ISearch>> {
+    const myheaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenStorage.getToken()}`,
+    })
+    var url = maniUrl + '/search/user/' + search;
+    return this.http.get<ISearch>(url, {
       headers: myheaders,
       observe: 'response',
       responseType: 'json',
