@@ -107,12 +107,18 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
           <form>
-            <div class="input-group dropdown no-border">
+            <div class="input-group no-border">
               <input type="text" #inputValue (keyup)="search(inputValue.value)" class="form-control" placeholder="Search...">
-              <div *ngIf="searchUserRes" class="dropdown-content">
+              <div *ngIf="searchUserRes" class="w-100 dropdown-content">
                 <div *ngFor="let searchUsr of searchUserRes" class="input-group-append">
-                  <div class="input-group-text">
-                    <i *ngIf="searchUsr.username" class="">{{searchUsr.username}}</i>
+                  <div class="input-group-text row">
+                    <i class="col" *ngIf="searchUsr.username" [routerLink]="['/profile/', searchUsr.username]" > <img
+                      class="rounded-circle img-fluid"
+                      src="data:image/png;base64,{{
+                        searchUsr.photo
+                      }}"
+                      style="width: 25px; height: 25px"
+                    /> {{searchUsr.username}}</i>
                     <i *ngIf="searchUsr.TagName" class="">{{searchUsr.TagName}}</i>
                   </div>
                 </div>
@@ -123,7 +129,7 @@
 
           </form>
           <ul class="navbar-nav">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link btn-magnify" href="javascript:void(0)">
                 <i class="nc-icon nc-layout-11"></i>
                 <p>
@@ -144,7 +150,7 @@
                 <a ngbDropdownItem href="javascript:void(0)">Another action</a>
                 <a ngbDropdownItem href="javascript:void(0)">Something else here</a>
               </div>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link btn-rotate" href="javascript:void(0)">
                 <i class="nc-icon nc-settings-gear-65"></i>

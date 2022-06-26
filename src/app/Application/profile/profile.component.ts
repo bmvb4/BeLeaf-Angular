@@ -127,7 +127,9 @@ export class ProfileComponent implements OnInit {
   }
   editProfilPut(){
     var removePosition = this.myForm.value.fileSource.indexOf(',');
-    var image = this.myForm.value.fileSource.substring(removePosition + 1);
+    var image = this.imageSrc.substring(removePosition + 1);
+    this.updateUser.username = this.myUser.username
+
     this.updateUser.description = this.myUser.description
     this.updateUser.firstName = this.myUser.firstName
     this.updateUser.lastName = this.myUser.lastName
@@ -137,7 +139,8 @@ export class ProfileComponent implements OnInit {
     }else{
       this.updateUser.photo = this.myUser.photo;
     }
-
+    console.log(this.updateUser.username)
+    console.log(this.updateUser.username)
     this.apiService.ProfileUpdate(this.updateUser).subscribe(resp => {
       this.tokenStorage.saveUser(resp.body);
       this.userPhoto = resp.body?.photo;
